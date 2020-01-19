@@ -1,4 +1,4 @@
-package com.psawesome.testcodeproject.domains.entity;
+package com.psawesome.testcodeproject.userInfo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

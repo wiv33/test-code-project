@@ -1,6 +1,6 @@
-package com.psawesome.testcodeproject.domains.repo;
+package com.psawesome.testcodeproject.userInfo.repo;
 
-import com.psawesome.testcodeproject.domains.entity.UserInfo;
+import com.psawesome.testcodeproject.userInfo.entity.UserInfo;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 /**

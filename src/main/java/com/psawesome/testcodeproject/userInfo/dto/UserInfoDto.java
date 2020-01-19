@@ -1,4 +1,4 @@
-package com.psawesome.testcodeproject.domains.dto;
+package com.psawesome.testcodeproject.userInfo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

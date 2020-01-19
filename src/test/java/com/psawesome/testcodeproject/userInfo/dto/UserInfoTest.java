@@ -1,7 +1,7 @@
-package com.psawesome.testcodeproject.domains.dto;
+package com.psawesome.testcodeproject.userInfo.dto;
 
-import com.psawesome.testcodeproject.domains.entity.UserInfo;
-import com.psawesome.testcodeproject.domains.repo.UserInfoRepository;
+import com.psawesome.testcodeproject.userInfo.entity.UserInfo;
+import com.psawesome.testcodeproject.userInfo.repo.UserInfoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
