@@ -1,6 +1,5 @@
 package com.psawesome.testcodeproject.pagination;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -17,47 +16,53 @@ public class Pagination {
 
     private String baseUrl;
 
-    @BeforeEach
-    void setUp() {
-        startPage = 1;
-        maximumPageCount = 7;
-        itemCountInPage = 10;
-        pageTotalCount = 32532;
-
-        baseUrl = "testUrl";
-    }
+    private String queryCurrPage = "currPage";
 
     @Test
-    public void makePaginationHtmlTest() throws Exception {
-        StringBuilder sb = new StringBuilder();
+    void doEndTag() {
         if (pageTotalCount < 1) {
-            throw new Exception("페이징할 리스트가 없습니다.");
+            throw new RuntimeException("페이징할 페이지가 없습니다.");
         }
+        StringBuilder sb = new StringBuilder();
         sb.append("<nav>");
         sb.append("<ul>");
 
-        sb.append(this.getPaginationHtml(maximumPageCount, startPage, pageTotalCount));
+        sb.append(this.getPaginationHtml(
+                this.maximumPageCount,
+                this.startPage,
+                this.pageTotalCount,
+                this.baseUrl));
 
         sb.append("</ul>");
         sb.append("</nav>");
 
-        System.out.println(sb.toString());
+
     }
 
-    private String getPaginationHtml(int maximumPageCount, int startPage, int pageTotalCount) {
+    private String getPaginationHtml(int maximumPageCount, int startPage, int pageTotalCount, String baseUrl) {
         StringBuilder sb = new StringBuilder();
+        sb.append("<li>");
+        String prevUrl = String.format("%s?%s=%d", baseUrl, this.queryCurrPage, startPage - 1 > 0 ? startPage - 1 : 1);
+        sb.append(
+                String.format("<a href=\"%s\">" +
+                                "<img src=\"/resources/images/common/prev-arrow.png\" title=\"prev\"/></a>",
+                        startPage > 1 ? prevUrl : "javascript:void(0)"));
+        sb.append("</li>");
 
         if (startPage < maximumPageCount) {
-            maximumPageCount = Math.min(pageTotalCount, maximumPageCount);
+            boolean isNotFullSize = pageTotalCount < maximumPageCount;
+            maximumPageCount = isNotFullSize ? pageTotalCount : maximumPageCount;
 
             for (int i = 0; i < maximumPageCount; i++)
-                this.appendPageNumberLiHtmlTag(sb, this.baseUrl, startPage, i + 1);
+                this.appendPageNumberLiHtmlTag(sb, baseUrl, startPage, i + 1);
 
-            this.appendEllipsisHtmlLiTag(sb);
-            this.appendPageNumberLiHtmlTag(sb, baseUrl, -1, pageTotalCount);
+            if (!isNotFullSize) {
+                this.appendEllipsisHtmlLiTag(sb);
+                this.appendPageNumberLiHtmlTag(sb, baseUrl, -1, pageTotalCount);
+            }
 
-        } else if (pageTotalCount < (startPage + maximumPageCount)) {
-            int lastPage = pageTotalCount - maximumPageCount;
+        } else if (pageTotalCount < (startPage + maximumPageCount - 1)) {
+            int lastPage = pageTotalCount - maximumPageCount + 1;
             this.appendPageNumberLiHtmlTag(sb, baseUrl, -1, 1);
             this.appendEllipsisHtmlLiTag(sb);
 
@@ -65,7 +70,6 @@ public class Pagination {
                 this.appendPageNumberLiHtmlTag(sb, baseUrl, startPage, i);
 
         } else {
-
             this.appendPageNumberLiHtmlTag(sb, baseUrl, -1, 1);
             this.appendEllipsisHtmlLiTag(sb);
 
@@ -77,6 +81,14 @@ public class Pagination {
             this.appendPageNumberLiHtmlTag(sb, baseUrl, -1, pageTotalCount);
         }
 
+        sb.append("<li>");
+        String nextUrl = String.format("%s?%s=%d", baseUrl, queryCurrPage, Math.min(startPage + 1, pageTotalCount));
+        sb.append(
+                String.format("<a href=\"%s\">" +
+                                "<img src=\"/resources/images/common/next-arrow.png\" title=\"next\"/></a>",
+                        startPage < pageTotalCount ? nextUrl : "javascript:void(0)"
+                ));
+        sb.append("</li>");
         return sb.toString();
     }
 
@@ -85,20 +97,12 @@ public class Pagination {
     }
 
     private void appendPageNumberLiHtmlTag(StringBuilder sb, String baseUrl, int startPage, int i) {
-        boolean bool = startPage == i;
-        /*
-            i * this.itemCountInPage
-            OR
-            i
-
-            item 개수 기준으로 리스트 출력 parameter를 보낼 것인지,
-            page 기준으로 리스트 출력 parameter를 보낼 것인지에 따라 다르다.
-        */
-        String tempUrl = String.format("%s?startItem=%d", baseUrl, i * this.itemCountInPage);
+        boolean isCurrentNum = startPage == i;
+        String tempUrl = String.format("%s?%s=%d", baseUrl, queryCurrPage, i);
         sb.append(
                 String.format("<li><a class=\"%s\" href=\"%s\">%d</a></li>",
-                        bool ? "active" : "",
-                        bool ? "javascript:void(0)" : tempUrl,
+                        isCurrentNum ? "active" : "",
+                        isCurrentNum ? "javascript:void(0)" : tempUrl,
                         i
                 ));
     }
