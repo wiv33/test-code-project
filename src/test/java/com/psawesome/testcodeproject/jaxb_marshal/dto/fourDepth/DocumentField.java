@@ -12,4 +12,43 @@ package com.psawesome.testcodeproject.jaxb_marshal.dto.fourDepth;
  */
 
 public class DocumentField {
+    DOCID
+    TOTAL_ID
+    ARTICLE_ID
+    SOURCE_CODE
+    VIEW_FLAG
+    ART_TYPE
+    SERVICE_DAY
+    SERVICE_TIME
+    CONTENT_TYPE
+    PRESSDATE
+    PRESSCATEGORY
+    PRESSMYUN
+    ART_CRE_TIME
+    ART_UPD_TIME
+    SOURCE_NAME
+    SEARCH_CODE
+    PORTAL_CODE
+    MEDIA_CODE
+    MASTER_CODE_LIST
+    SERVICE_CODE
+    SECTION_NAME
+    SERVICE_CODE_LIST
+    SECTION_NAME_LIST
+    ART_THUMB
+    ART_TITLE
+    MOB_TITLE
+    ART_REPORTER
+    ART_SUBTITLE
+    ART_KWD
+    SERVICE_FULLCODE
+    ART_CONTENT
+    REPORTER_GROUP
+    SRC_GRP_CD
+    ART_REP_NO
+    Date
+    JOONGANG_USE
+    ILGAN_USE
+    NEWSALIAS
+    DUP_TITLE
 }
