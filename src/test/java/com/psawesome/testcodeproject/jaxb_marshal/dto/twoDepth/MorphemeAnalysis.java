@@ -1,7 +1,8 @@
-package com.psawesome.testcodeproject.jaxb_marshal.dto;
+package com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth;
+
+import com.psawesome.testcodeproject.jaxb_marshal.dto.threeDepth.AnalysisField;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
  * @author pilseong
@@ -16,4 +17,11 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 public class MorphemeAnalysis {
 
+    @XmlElement(name = "Field")
+    private AnalysisField field;
+
+    public MorphemeAnalysis setField(AnalysisField field) {
+        this.field = field;
+        return this;
+    }
 }

@@ -1,4 +1,4 @@
-package com.psawesome.testcodeproject.jaxb_marshal.dto;
+package com.psawesome.testcodeproject.jaxb_marshal.dto.threeDepth;
 
 /**
  * @author pilseong
@@ -8,8 +8,8 @@ package com.psawesome.testcodeproject.jaxb_marshal.dto;
  * <p>
  * 수정일             수정자            수정내용
  * ------          --------      --------------------------
- * @since 2020-02-26
+ * @since 2020-02-27
  */
 
-public class MultiGroup {
+public class ArtDocument {
 }

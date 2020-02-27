@@ -1,5 +1,9 @@
 package com.psawesome.testcodeproject.jaxb_marshal.dto;
 
+import com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth.DocumentSet;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth.MorphemeAnalysis;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth.MultiGroup;
+
 import javax.xml.bind.annotation.XmlElement;
 
 /**
