@@ -7,12 +7,11 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * package: com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom
@@ -40,7 +39,7 @@ public class CreatedElement implements CreatedElementInterface {
     public CreatedElement(List<String> elementsIds) {
         this();
         assert elementsIds.size() > 0;
-        Map<String, Element> _elMap = new ConcurrentHashMap<>();
+        Map<String, Element> _elMap = new HashMap<>();
         elementsIds.forEach(id -> _elMap.put(id, this.d.createElement(id)));
         this._elementsMap = _elMap;
     }
@@ -71,6 +70,7 @@ public class CreatedElement implements CreatedElementInterface {
     }
 
     public CreatedElement setRootElement(Element element) {
+        this.stepEnd();
         this._element = Objects.requireNonNull(element);
         return this;
     }
@@ -99,7 +99,7 @@ public class CreatedElement implements CreatedElementInterface {
     }
 
     public Element putAndGetElement(String elementId) {
-        Element element = this.getElement(elementId);
+        Element element = d.createElement(elementId);
         if (Objects.nonNull(this._elementsMap.get(elementId))) {
             recentElementId = elementId;
             this._elementsMap.put(elementId, element);
@@ -126,6 +126,7 @@ public class CreatedElement implements CreatedElementInterface {
 
     public CreatedElement stepEnd(CreatedElement ce,Consumer<CreatedElement> consumer) {
         consumer.accept(ce);
+        this.stepEnd();
         return this;
     }
 

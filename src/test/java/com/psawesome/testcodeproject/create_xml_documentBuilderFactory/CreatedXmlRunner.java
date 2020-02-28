@@ -32,69 +32,48 @@ public class CreatedXmlRunner {
     void runCreatedXML() {
 
         CreatedElement ce = new CreatedElement(
-                List.of("RSS", "Collection", "MorphemeAnalysis", "DocumentSet", "MultiGroup"));
+                List.of("RSS", "Collection", "MorphemeAnalysis", "DocumentSet", "Document", "MultiGroup"));
         Element rss = ce.getElement("RSS");
         Element collection = ce.getElement("Collection");
         Element morphemeAnalysis = ce.getElement("MorphemeAnalysis");
         Element documentSet = ce.getElement("DocumentSet");
         Element multiGroup = ce.getElement("MultiGroup");
+        Element document = ce.getElement("Document");
         ce.setRootElement(rss)
                 .createDomTree(collection)
+                .appendChild("Version", "5.0.0")
+                .appendChild("SuggestedQuery", "")
                 .stepEnd()
         .setRootElement(collection)
                 .createDomTree(documentSet, morphemeAnalysis, multiGroup)
-                .stepEnd()
+                .appendChild("Id", "Collection Id")
+                .appendChild("original", "Collection Original")
             .setRootElement(documentSet)
                     .createDomTree(ce.putAndGetElement("Document"))
-                    .stepEnd()
-                .setRootElement(ce.getElement("Document"))
+                    .appendChild("Count", "5")
+                    .appendChild("TotalCount", "135")
+                .setRootElement(document)
                         .createDomTree(ce.putAndGetElement("Field"))
-                        .stepEnd()
+                        .appendChild("Uid", "UID")
+                        .appendChild("Rank", "Rank")
+                        .appendChild("Weight", "Weight")
+                        .appendChild("SearcherId", "SearcherId")
+                        .appendChild("CollectionId", "CollectionId")
+                        .appendChild("DuplicateDocumentCount", "DuplicateDocumentCount")
                 .setRootElement(ce.getElement("Field"))
                         .stepEnd(ce, this::makeDocumentFields)
                         .stepRemoveRecentElementEnd()
             .setRootElement(morphemeAnalysis)
+                 .createDomTree(ce.putAndGetElement("Field"))
+                    .setRootElement(ce.getElement("Field"))
+                    .stepEnd(ce, this::makeMorphemeFields)
+                    .stepRemoveRecentElementEnd()
+            .setRootElement(multiGroup)
                 .createDomTree(ce.putAndGetElement("Field"))
-                .stepEnd(ce, this::makeMorphemeFields)
-                .stepRemoveRecentElementEnd()
-
+                    .setRootElement(ce.getElement("Field"))
+                    .stepEnd(ce, this::makeMultiGroupFields)
+                    .stepRemoveRecentElementEnd()
         ;
-
-
-
-        Element documentSet = d.createElement("DocumentSet");
-        Element document = d.createElement("Document");
-        Element docField = d.createElement("Field");
-
-
-        document.appendChild(d.createElement("Uid"));
-        document.appendChild(d.createElement("Rank"));
-        document.appendChild(d.createElement("Weight"));
-        document.appendChild(d.createElement("SearcherId"));
-        document.appendChild(d.createElement("CollectionId"));
-        document.appendChild(d.createElement("DuplicateDocumentCount"));
-//        document.appendChild(docField);
-
-        documentSet.appendChild(d.createElement("Count"));
-        documentSet.appendChild(d.createElement("TotalCount"));
-//        documentSet.appendChild(document);
-
-        collection.appendChild(d.createElement("Id"));
-        collection.appendChild(d.createElement("original"));
-//        collection.appendChild(documentSet);
-
-        rss.appendChild(d.createElement("Version"));
-        rss.appendChild(d.createElement("SuggestedQuery"));
-//        rss.appendChild(collection);
-
-        my.createDomTree(rss,
-                d.createElement("Version"),
-                d.createElement("SuggestedQuery"),
-                collection)
-                .createDomTree(collection, documentSet, morphemeAnalysis)
-                .createDomTree(documentSet, document)
-                .createDomTree(document, docField)
-                .createDomTree(morphemeAnalysis, morphemeField);
 
 
         TransformerFactory tf = TransformerFactory.newInstance();
@@ -161,5 +140,11 @@ public class CreatedXmlRunner {
                 .appendChild("ART_SUBTITLE", "ART SUB TITLE");
     }
 
-
+    private void makeMultiGroupFields(CreatedElement createdElement) {
+        createdElement
+                .appendChild("SRC_GRP_CD", "")
+                .appendChild("SERVICE_CODE", "")
+                .appendChild("REPORTER_GROUP", "")
+                ;
+    }
 }
