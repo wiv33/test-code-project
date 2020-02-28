@@ -1,10 +1,10 @@
 package com.psawesome.testcodeproject.jaxb_marshal;
 
 import com.psawesome.testcodeproject.jaxb_marshal.dto.*;
-import com.psawesome.testcodeproject.jaxb_marshal.dto.threeDepth.AnalysisField;
-import com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth.DocumentSet;
-import com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth.MorphemeAnalysis;
-import com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth.MultiGroup;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.morpheme_analysis.AnalysisField;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.document_set.DocumentSet;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.morpheme_analysis.MorphemeAnalysis;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.multi_group.MultiGroup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.psawesome.testcodeproject.jaxb_marshal.dto.threeDepth;
+package com.psawesome.testcodeproject.jaxb_marshal.dto.morpheme_analysis;
 
 /**
  * @author pilseong

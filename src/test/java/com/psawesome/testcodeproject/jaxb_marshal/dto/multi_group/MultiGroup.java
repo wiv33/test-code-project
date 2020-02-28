@@ -1,6 +1,6 @@
-package com.psawesome.testcodeproject.jaxb_marshal.dto.twoDepth;
+package com.psawesome.testcodeproject.jaxb_marshal.dto.multi_group;
 
-import com.psawesome.testcodeproject.jaxb_marshal.dto.threeDepth.AnalysisField;
+import com.psawesome.testcodeproject.jaxb_marshal.dto.morpheme_analysis.MultiField;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -15,13 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
  * @since 2020-02-26
  */
 
-public class MorphemeAnalysis {
+public class MultiGroup {
 
     @XmlElement(name = "Field")
-    private AnalysisField field;
+    private MultiField multiField;
 
-    public MorphemeAnalysis setField(AnalysisField field) {
-        this.field = field;
+    public MultiGroup setMultiField(MultiField multiField) {
+        this.multiField = multiField;
         return this;
     }
 }
