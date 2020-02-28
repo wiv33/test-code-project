@@ -11,18 +11,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * package: com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom
  * author: PS
  * DATE: 2020-02-28 금요일 22:15
  */
-public class MyElement implements MyElementInterface {
+public class CreatedElement implements CreatedElementInterface {
     private Element _element;
+    private String recentElementId;
     private Map<String, Element> _elementsMap;
     private Document d;
 
-    public MyElement() {
+    public CreatedElement() {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newDefaultInstance();
         DocumentBuilder db = null;
         try {
@@ -31,11 +34,10 @@ public class MyElement implements MyElementInterface {
             e.printStackTrace();
         }
         assert db != null;
-
         this.d = db.newDocument();
     }
 
-    public MyElement(List<String> elementsIds) {
+    public CreatedElement(List<String> elementsIds) {
         this();
         assert elementsIds.size() > 0;
         Map<String, Element> _elMap = new ConcurrentHashMap<>();
@@ -43,28 +45,38 @@ public class MyElement implements MyElementInterface {
         this._elementsMap = _elMap;
     }
 
-    public MyElement appendChild(String elementId, String textContent) {
+    public CreatedElement appendChild(String elementId, String textContent) {
         Objects.requireNonNull(this._element)
                 .appendChild(this.setCDATA_content(elementId, textContent));
         return this;
     }
+    public CreatedElement appendChild(Element element) {
+        Objects.requireNonNull(this._element)
+                .appendChild(element);
+        return this;
+    }
 
     @Override
-    public MyElement createDomTree(Element root, Element... elements) {
+    public CreatedElement createDomTree(Element... elements) {
         for (Element element : elements) {
-            root.appendChild(element);
+            this._element.appendChild(element);
         }
         return this;
     }
 
     @Override
-    public MyElement setElement(String elementId) {
+    public CreatedElement setRootElement(String elementId) {
         this._element = this.d.createElement(elementId);
         return this;
     }
 
+    public CreatedElement setRootElement(Element element) {
+        this._element = Objects.requireNonNull(element);
+        return this;
+    }
+
     @Override
-    public MyElement nonCDATAChild(String elementId, String textContent) {
+    public CreatedElement nonCDATAChild(String elementId, String textContent) {
         Element element = Objects.requireNonNull(this._element);
         Element child = this.d.createElement(elementId);
         child.setTextContent(textContent);
@@ -79,4 +91,42 @@ public class MyElement implements MyElementInterface {
         newElement.appendChild(cdataSection);
         return newElement;
     }
+
+    public Element getElement(String elementId) {
+        assert !elementId.isEmpty();
+        Element obj = _elementsMap.get(elementId);
+        return Objects.isNull(obj) ? d.createElement(elementId) : obj;
+    }
+
+    public Element putAndGetElement(String elementId) {
+        Element element = this.getElement(elementId);
+        if (Objects.nonNull(this._elementsMap.get(elementId))) {
+            recentElementId = elementId;
+            this._elementsMap.put(elementId, element);
+        }
+        return element;
+    }
+
+    public CreatedElement stepEnd() {
+        this._element = null;
+        return this;
+    }
+    public CreatedElement stepRemoveEnd(String removeElementId) {
+        assert removeElementId != null;
+        this._elementsMap.remove(removeElementId);
+        return this;
+    }
+
+    public CreatedElement stepRemoveRecentElementEnd() {
+        if (Objects.nonNull(this._elementsMap.get(recentElementId))) {
+            this._elementsMap.remove(recentElementId);
+        }
+        return this;
+    }
+
+    public CreatedElement stepEnd(CreatedElement ce,Consumer<CreatedElement> consumer) {
+        consumer.accept(ce);
+        return this;
+    }
+
 }

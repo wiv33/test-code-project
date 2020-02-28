@@ -1,6 +1,7 @@
 package com.psawesome.testcodeproject.create_xml_documentBuilderFactory;
 
-import com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom.MyElement;
+import com.mongodb.event.CommandSucceededEvent;
+import com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom.CreatedElement;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,6 +10,8 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author pilseong
@@ -28,56 +31,40 @@ public class CreatedXmlRunner {
     @Test
     void runCreatedXML() {
 
-        MyElement my = new MyElement();
+        CreatedElement ce = new CreatedElement(
+                List.of("RSS", "Collection", "MorphemeAnalysis", "DocumentSet", "MultiGroup"));
+        Element rss = ce.getElement("RSS");
+        Element collection = ce.getElement("Collection");
+        Element morphemeAnalysis = ce.getElement("MorphemeAnalysis");
+        Element documentSet = ce.getElement("DocumentSet");
+        Element multiGroup = ce.getElement("MultiGroup");
+        ce.setRootElement(rss)
+                .createDomTree(collection)
+                .stepEnd()
+        .setRootElement(collection)
+                .createDomTree(documentSet, morphemeAnalysis, multiGroup)
+                .stepEnd()
+            .setRootElement(documentSet)
+                    .createDomTree(ce.putAndGetElement("Document"))
+                    .stepEnd()
+                .setRootElement(ce.getElement("Document"))
+                        .createDomTree(ce.putAndGetElement("Field"))
+                        .stepEnd()
+                .setRootElement(ce.getElement("Field"))
+                        .stepEnd(ce, this::makeDocumentFields)
+                        .stepRemoveRecentElementEnd()
+            .setRootElement(morphemeAnalysis)
+                .createDomTree(ce.putAndGetElement("Field"))
+                .stepEnd(ce, this::makeMorphemeFields)
+                .stepRemoveRecentElementEnd()
 
-        Element rss = d.createElement("RSS");
-
-        Element collection = d.createElement("Collection");
-
-        Element morphemeAnalysis = d.createElement("MorphemeAnalysis");
-        Element morphemeField = d.createElement("Field");
-
-        morphemeField.appendChild(setCDATA_content("ART_TITLE", "my Title!!"));
-        morphemeField.appendChild(setCDATA_content("MOB_TITLE", "MOB TITLE"));
-        morphemeField.appendChild(setCDATA_content("ART_KWD", "ART KWD"));
-        morphemeField.appendChild(setCDATA_content("ART_REPORTER", "ART REPORTER"));
-        morphemeField.appendChild(setCDATA_content("ART_SUBTITLE", "ART SUB TITLE"))
         ;
-//        morphemeAnalysis.appendChild(morphemeField);
+
+
 
         Element documentSet = d.createElement("DocumentSet");
         Element document = d.createElement("Document");
         Element docField = d.createElement("Field");
-
-        my.setElement("Field")
-                .appendChild("DOCID", "2732145")
-                .appendChild("TOTAL_ID", "퉤스트")
-                .appendChild("ARTICLE_ID", "본문")
-                .appendChild("SOURCE_CODE", "본문")
-                .appendChild("VIEW_FLAG", "본문")
-                .appendChild("ART_TYPE", "본문")
-                .appendChild("SERVICE_DAY", "본문")
-                .appendChild("SERVICE_TIME", "본문")
-                .appendChild("CONTENT_TYPE", "본문")
-                .appendChild("PRESSDATE", "본문")
-                .appendChild("PRESSCATEGORY", "본문")
-                .appendChild("PRESSMYUN", "본문")
-                .appendChild("ART_CRE_TIME", "본문")
-                .appendChild("ART_UPD_TIME", "본문")
-                .appendChild("SOURCE_NAME", "본문")
-                .appendChild("SEARCH_CODE", "본문")
-                .appendChild("PORTAL_CODE", "본문")
-                .appendChild("MEDIA_CODE", "본문")
-                .appendChild("MASTER_CODE_LIST", "본문")
-                .appendChild("SERVICE_CODE", "본문")
-                .appendChild("SECTION_NAME", "본문")
-                .appendChild("SERVICE_CODE_LIST", "본문")
-                .appendChild("SECTION_NAME_LIST", "본문")
-                .appendChild("ART_THUMB", "본문")
-                .appendChild("ART_TITLE", "본문")
-                .appendChild("MOB_TITLE", "본문")
-                .appendChild("ART_REPORTER", "본문")
-        ;
 
 
         document.appendChild(d.createElement("Uid"));
@@ -132,6 +119,46 @@ public class CreatedXmlRunner {
         }
         System.out.println(sw.toString());
 
+    }
+
+    private void makeDocumentFields(CreatedElement createdElement) {
+        createdElement.appendChild("DOCID", "2732145")
+                .appendChild("TOTAL_ID", "퉤스트")
+                .appendChild("ARTICLE_ID", "본문")
+                .appendChild("SOURCE_CODE", "본문")
+                .appendChild("VIEW_FLAG", "본문")
+                .appendChild("ART_TYPE", "본문")
+                .appendChild("SERVICE_DAY", "본문")
+                .appendChild("SERVICE_TIME", "본문")
+                .appendChild("CONTENT_TYPE", "본문")
+                .appendChild("PRESSDATE", "본문")
+                .appendChild("PRESSCATEGORY", "본문")
+                .appendChild("PRESSMYUN", "본문")
+                .appendChild("ART_CRE_TIME", "본문")
+                .appendChild("ART_UPD_TIME", "본문")
+                .appendChild("SOURCE_NAME", "본문")
+                .appendChild("SEARCH_CODE", "본문")
+                .appendChild("PORTAL_CODE", "본문")
+                .appendChild("MEDIA_CODE", "본문")
+                .appendChild("MASTER_CODE_LIST", "본문")
+                .appendChild("SERVICE_CODE", "본문")
+                .appendChild("SECTION_NAME", "본문")
+                .appendChild("SERVICE_CODE_LIST", "본문")
+                .appendChild("SECTION_NAME_LIST", "본문")
+                .appendChild("ART_THUMB", "본문")
+                .appendChild("ART_TITLE", "본문")
+                .appendChild("MOB_TITLE", "본문")
+                .appendChild("ART_REPORTER", "본문")
+        ;
+    }
+
+    private void makeMorphemeFields(CreatedElement createdElement) {
+        createdElement
+                .appendChild("ART_TITLE", "my Title!!")
+                .appendChild("MOB_TITLE", "MOB TITLE")
+                .appendChild("ART_KWD", "ART KWD")
+                .appendChild("ART_REPORTER", "ART REPORTER")
+                .appendChild("ART_SUBTITLE", "ART SUB TITLE");
     }
 
 
