@@ -16,9 +16,9 @@ import javax.xml.bind.annotation.XmlElement;
 public class MorphemeAnalysis {
 
     @XmlElement(name = "Field")
-    private AnalysisField field;
+    private MorphemeField field;
 
-    public MorphemeAnalysis setField(AnalysisField field) {
+    public MorphemeAnalysis setField(MorphemeField field) {
         this.field = field;
         return this;
     }

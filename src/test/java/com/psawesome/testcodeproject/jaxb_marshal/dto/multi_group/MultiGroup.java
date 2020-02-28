@@ -1,7 +1,5 @@
 package com.psawesome.testcodeproject.jaxb_marshal.dto.multi_group;
 
-import com.psawesome.testcodeproject.jaxb_marshal.dto.morpheme_analysis.MultiField;
-
 import javax.xml.bind.annotation.XmlElement;
 
 /**
