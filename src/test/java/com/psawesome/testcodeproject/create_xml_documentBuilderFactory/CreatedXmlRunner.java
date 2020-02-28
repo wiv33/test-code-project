@@ -50,12 +50,11 @@ public class CreatedXmlRunner {
         CDATASection art_title = d.createCDATASection("ART_TITLE");
         art_title.setTextContent("my TITLE");
 
-        morphemeField
-                .appendChild(art_title)
-                .appendChild(setCDATA_content(d, "MOB_TITLE", "MOB TITLE"))
-                .appendChild(setCDATA_content(d, "ART_KWD", "ART KWD"))
-                .appendChild(setCDATA_content(d, "ART_REPORTER", "ART REPORTER"))
-                .appendChild(setCDATA_content(d, "ART_SUBTITLE", "ART SUB TITLE"))
+        morphemeField.appendChild(art_title);
+        morphemeField.appendChild(setCDATA_content(d, "MOB_TITLE", "MOB TITLE"));
+        morphemeField.appendChild(setCDATA_content(d, "ART_KWD", "ART KWD"));
+        morphemeField.appendChild(setCDATA_content(d, "ART_REPORTER", "ART REPORTER"));
+        morphemeField.appendChild(setCDATA_content(d, "ART_SUBTITLE", "ART SUB TITLE"))
         ;
         morphemeAnalysis.appendChild(morphemeField);
 
@@ -63,74 +62,64 @@ public class CreatedXmlRunner {
         Element document = d.createElement("Document");
         Element docField = d.createElement("Field");
 
-        CDATASection docid = setCDATA_content(d,"DOCID", "2732145");
-        d.createCDATASection("DOCID");
-        d.createCDATASection("TOTAL_ID");
-        d.createCDATASection("ARTICLE_ID");
-        d.createCDATASection("SOURCE_CODE");
-        d.createCDATASection("VIEW_FLAG");
-        d.createCDATASection("ART_TYPE");
-        d.createCDATASection("SERVICE_DAY");
-        d.createCDATASection("SERVICE_TIME");
-        d.createCDATASection("CONTENT_TYPE");
-        d.createCDATASection("PRESSDATE");
-        d.createCDATASection("PRESSCATEGORY");
-        d.createCDATASection("PRESSMYUN");
-        d.createCDATASection("ART_CRE_TIME");
-        d.createCDATASection("ART_UPD_TIME");
-        d.createCDATASection("SOURCE_NAME");
-        d.createCDATASection("SEARCH_CODE");
-        d.createCDATASection("PORTAL_CODE");
-        d.createCDATASection("MEDIA_CODE");
-        d.createCDATASection("MASTER_CODE_LIST");
-        d.createCDATASection("SERVICE_CODE");
-        d.createCDATASection("SECTION_NAME");
-        d.createCDATASection("SERVICE_CODE_LIST");
-        d.createCDATASection("SECTION_NAME_LIST");
-        d.createCDATASection("ART_THUMB");
-        d.createCDATASection("ART_TITLE");
-        d.createCDATASection("MOB_TITLE");
-        d.createCDATASection("ART_REPORTER");
-        d.createCDATASection("ART_SUBTITLE");
-        d.createCDATASection("ART_KWD");
-        d.createCDATASection("SERVICE_FULLCODE");
-        d.createCDATASection("ART_CONTENT");
-        d.createCDATASection("REPORTER_GROUP");
-        d.createCDATASection("SRC_GRP_CD");
-        d.createCDATASection("ART_REP_NO");
-        d.createCDATASection("DATE");
-        d.createCDATASection("JOONGANG_USE");
-        d.createCDATASection("ILGAN_USE");
-        d.createCDATASection("NEWSALIAS");
+        docField.appendChild(setCDATA_content(d, "DOCID", "2732145"));
+        docField.appendChild(setCDATA_content(d, "TOTAL_ID", "본문"));
+        docField.appendChild(setCDATA_content(d, "ARTICLE_ID", "본문"));
+        docField.appendChild(setCDATA_content(d, "SOURCE_CODE", "본문"));
+        docField.appendChild(setCDATA_content(d, "VIEW_FLAG", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_TYPE", "본문"));
+        docField.appendChild(setCDATA_content(d, "SERVICE_DAY", "본문"));
+        docField.appendChild(setCDATA_content(d, "SERVICE_TIME", "본문"));
+        docField.appendChild(setCDATA_content(d, "CONTENT_TYPE", "본문"));
+        docField.appendChild(setCDATA_content(d, "PRESSDATE", "본문"));
+        docField.appendChild(setCDATA_content(d, "PRESSCATEGORY", "본문"));
+        docField.appendChild(setCDATA_content(d, "PRESSMYUN", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_CRE_TIME", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_UPD_TIME", "본문"));
+        docField.appendChild(setCDATA_content(d, "SOURCE_NAME", "본문"));
+        docField.appendChild(setCDATA_content(d, "SEARCH_CODE", "본문"));
+        docField.appendChild(setCDATA_content(d, "PORTAL_CODE", "본문"));
+        docField.appendChild(setCDATA_content(d, "MEDIA_CODE", "본문"));
+        docField.appendChild(setCDATA_content(d, "MASTER_CODE_LIST", "본문"));
+        docField.appendChild(setCDATA_content(d, "SERVICE_CODE", "본문"));
+        docField.appendChild(setCDATA_content(d, "SECTION_NAME", "본문"));
+        docField.appendChild(setCDATA_content(d, "SERVICE_CODE_LIST", "본문"));
+        docField.appendChild(setCDATA_content(d, "SECTION_NAME_LIST", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_THUMB", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_TITLE", "본문"));
+        docField.appendChild(setCDATA_content(d, "MOB_TITLE", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_REPORTER", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_SUBTITLE", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_KWD", "본문"));
+        docField.appendChild(setCDATA_content(d, "SERVICE_FULLCODE", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_CONTENT", "본문"));
+        docField.appendChild(setCDATA_content(d, "REPORTER_GROUP", "본문"));
+        docField.appendChild(setCDATA_content(d, "SRC_GRP_CD", "본문"));
+        docField.appendChild(setCDATA_content(d, "ART_REP_NO", "본문"));
+        docField.appendChild(setCDATA_content(d, "DATE", "본문"));
+        docField.appendChild(setCDATA_content(d, "JOONGANG_USE", "본문"));
+        docField.appendChild(setCDATA_content(d, "ILGAN_USE", "본문"));
+        docField.appendChild(setCDATA_content(d, "NEWSALIAS", "본문"));
 
-        document.appendChild(d.createElement("Uid"))
-        .appendChild(d.createElement("Rank"))
+        document.appendChild(d.createElement("Uid"));
+        document.appendChild(d.createElement("Rank"));
+        document.appendChild(d.createElement("Weight"));
+        document.appendChild(d.createElement("SearcherId"));
+        document.appendChild(d.createElement("CollectionId"));
+        document.appendChild(d.createElement("DuplicateDocumentCount"));
+        document.appendChild(docField);
 
-        .appendChild(d.createElement("Weight"))
-        .appendChild(d.createElement("SearcherId"))
-        .appendChild(d.createElement("CollectionId"))
-        .appendChild(d.createElement("DuplicateDocumentCount"))
-        .appendChild(docField)
-        ;
+        documentSet.appendChild(d.createElement("Count"));
+        documentSet.appendChild(d.createElement("TotalCount"));
+        documentSet.appendChild(document);
 
+        collection.appendChild(d.createElement("Id"));
+        collection.appendChild(d.createElement("original"));
+        collection.appendChild(documentSet);
 
-        documentSet.appendChild(d.createElement("Count"))
-                .appendChild(d.createElement("TotalCount"))
-                ;
-
-
-
-        collection.appendChild(d.createElement("Id"))
-                .appendChild(d.createElement("original"))
-
-                ;
-
-
-        rss.appendChild(d.createElement("Version"))
-            .appendChild(d.createElement("SuggestedQuery"))
-            .appendChild(collection)
-        ;
-        d.appendChild(rss);
+        rss.appendChild(d.createElement("Version"));
+        rss.appendChild(d.createElement("SuggestedQuery"));
+        rss.appendChild(collection);
 
         TransformerFactory tf = TransformerFactory.newInstance( );
 	        Transformer t = null;
@@ -152,7 +141,7 @@ public class CreatedXmlRunner {
 	        StringWriter sw = new StringWriter( );
 	        try
 	        {
-	            t.transform( new DOMSource( d ) , new StreamResult( sw ) );
+	            t.transform( new DOMSource( rss ) , new StreamResult( sw ) );
 	        }
 	        catch ( TransformerException e )
 	        {
@@ -162,10 +151,12 @@ public class CreatedXmlRunner {
 
     }
 
-    private CDATASection setCDATA_content(Document d, String elementId, String textContent) {
+    private Element setCDATA_content(Document d, String elementId, String textContent) {
         CDATASection cdataSection = d.createCDATASection(elementId);
         cdataSection.setTextContent(textContent);
-        return cdataSection;
+        Element newElement = d.createElement(elementId);
+        newElement.appendChild(cdataSection);
+        return newElement;
     }
 
 
