@@ -44,15 +44,17 @@ public class CreatedElement implements CreatedElementInterface {
         this();
         assert elementsIds.size() > 0;
         Map<String, Element> _elMap = new HashMap<>();
-        elementsIds.forEach(id -> {
-            Element element = this.d.createElement(id);
-            _elMap.put(id, element);
-        });
+        elementsIds.forEach(id -> _elMap.put(id, this.d.createElement(id)));
         this._elementsMap = _elMap;
     }
 
     public Element get_rootElement() {
         return _rootElement;
+    }
+
+    public CreatedElement set_rootElement(Element _rootElement) {
+        this._rootElement = _rootElement;
+        return this;
     }
 
     public CreatedElement appendChild(String elementId, String textContent) {
@@ -76,8 +78,7 @@ public class CreatedElement implements CreatedElementInterface {
 
     @Override
     public CreatedElement setRootElement(String elementId) {
-        this._rootElement = this.d.createElement(elementId);
-        return this;
+        return this.set_rootElement(this.d.createElement(elementId));
     }
 
     public CreatedElement setRootElement(Element element) {
@@ -88,7 +89,7 @@ public class CreatedElement implements CreatedElementInterface {
 
     @Override
     public CreatedElement nonCDATAChild(String elementId, String textContent) {
-        Element element = Objects.requireNonNull(this._rootElement);
+        Element element = Objects.requireNonNull(this.get_rootElement());
         Element child = this.d.createElement(elementId);
         child.setTextContent(textContent);
         element.appendChild(child);
@@ -104,8 +105,8 @@ public class CreatedElement implements CreatedElementInterface {
     }
 
     public Element getElement(String elementId) {
-        assert !elementId.isEmpty();
-        Element obj = _elementsMap.get(elementId);
+        assert !elementId.isBlank();
+        Element obj = this._elementsMap.get(elementId);
         return Objects.isNull(obj) ? d.createElement(elementId) : obj;
     }
 
@@ -123,7 +124,7 @@ public class CreatedElement implements CreatedElementInterface {
         return this;
     }
     public CreatedElement stepRemoveEnd(String removeElementId) {
-        assert removeElementId != null;
+        assert !removeElementId.isBlank();
         this._elementsMap.remove(removeElementId);
         return this;
     }
