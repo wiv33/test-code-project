@@ -3,10 +3,16 @@ package com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -135,4 +141,30 @@ public class CreatedElement implements CreatedElementInterface {
         return this;
     }
 
+    public String getResultXml(Node printNode) {
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer t = null;
+        try {
+            t = tf.newTransformer();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        }
+        assert t != null;
+
+        t.setOutputProperty(OutputKeys.ENCODING, "utf-8");
+        t.setOutputProperty(OutputKeys.METHOD, "xml");
+        t.setOutputProperty(OutputKeys.INDENT, "yes");
+        t.setOutputProperty(OutputKeys.CDATA_SECTION_ELEMENTS, "yes");
+
+        String ret = "";
+        try(StringWriter sw = new StringWriter()){
+            t.transform(new DOMSource(printNode), new StreamResult(sw));
+            sw.flush();
+            ret = sw.toString();
+        } catch (IOException | TransformerException e) {
+            ret = e.getMessage();
+        }
+
+        return ret;
+    }
 }

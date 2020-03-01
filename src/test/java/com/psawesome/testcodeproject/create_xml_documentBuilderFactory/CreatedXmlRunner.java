@@ -84,28 +84,9 @@ public class CreatedXmlRunner {
                     .stepRemoveRecentElementEnd()
         ;
 
+        String s = ce.getResultXml(ce.getElement("RSS"));
 
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer t = null;
-        try {
-            t = tf.newTransformer();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        }
-        assert t != null;
-
-        t.setOutputProperty(OutputKeys.ENCODING, "utf-8");
-        t.setOutputProperty(OutputKeys.METHOD, "xml");
-        t.setOutputProperty(OutputKeys.INDENT, "yes");
-        t.setOutputProperty(OutputKeys.CDATA_SECTION_ELEMENTS, "yes");
-
-        StringWriter sw = new StringWriter();
-        try {
-            t.transform(new DOMSource(rss), new StreamResult(sw));
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-        System.out.println(sw.toString());
+        System.out.println(s);
 
     }
 
