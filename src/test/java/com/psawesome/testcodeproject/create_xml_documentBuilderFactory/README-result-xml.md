@@ -2,7 +2,8 @@
 
 ## Result String
 
-    <?xml version="1.0" encoding="utf-8"?><RSS>
+    <?xml version="1.0" encoding="utf-8"?>
+    <RSS>
         <Version>5.0.0</Version>
         <SuggestedQuery/>
         <Collection>
