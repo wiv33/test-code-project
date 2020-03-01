@@ -47,8 +47,8 @@ public class CreatedXmlRunner {
 
         ce.setRootElement(rss)
                 .createDomTree(collection)
-                .appendChild("Version", "5.0.0")
-                .appendChild("SuggestedQuery", "")
+                .nonCDATAChild("Version", "5.0.0")
+                .nonCDATAChild("SuggestedQuery", "")
                 .stepEnd()
         .setRootElement(collection)
                 .createDomTree(documentSet, morphemeAnalysis, multiGroup)
