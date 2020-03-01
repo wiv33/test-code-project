@@ -13,9 +13,11 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * package: com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom
