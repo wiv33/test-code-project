@@ -1,12 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RSS>
-    <Version>
-        <![CDATA[5.0.0]]>
-    </Version>
+<?xml version="1.0" encoding="utf-8"?><RSS>
+    <Version>5.0.0</Version>
     <SuggestedQuery/>
     <Collection>
+        <Id>
+            <![CDATA[Collection Id]]>
+        </Id>
+        <original>
+            <![CDATA[Collection Original]]>
+        </original>
         <DocumentSet>
+            <Count>
+                <![CDATA[5]]>
+            </Count>
+            <TotalCount>
+                <![CDATA[135]]>
+            </TotalCount>
             <Document>
+                <Uid>
+                    <![CDATA[UID]]>
+                </Uid>
+                <Rank>
+                    <![CDATA[Rank]]>
+                </Rank>
+                <Weight>
+                    <![CDATA[Weight]]>
+                </Weight>
+                <SearcherId>
+                    <![CDATA[SearcherId]]>
+                </SearcherId>
+                <CollectionId>
+                    <![CDATA[CollectionId]]>
+                </CollectionId>
+                <DuplicateDocumentCount>
+                    <![CDATA[DuplicateDocumentCount]]>
+                </DuplicateDocumentCount>
                 <Field>
                     <DOCID>
                         <![CDATA[2732145]]>
@@ -90,31 +117,7 @@
                         <![CDATA[본문]]>
                     </ART_REPORTER>
                 </Field>
-                <Uid>
-                    <![CDATA[UID]]>
-                </Uid>
-                <Rank>
-                    <![CDATA[Rank]]>
-                </Rank>
-                <Weight>
-                    <![CDATA[Weight]]>
-                </Weight>
-                <SearcherId>
-                    <![CDATA[SearcherId]]>
-                </SearcherId>
-                <CollectionId>
-                    <![CDATA[CollectionId]]>
-                </CollectionId>
-                <DuplicateDocumentCount>
-                    <![CDATA[DuplicateDocumentCount]]>
-                </DuplicateDocumentCount>
             </Document>
-            <Count>
-                <![CDATA[5]]>
-            </Count>
-            <TotalCount>
-                <![CDATA[135]]>
-            </TotalCount>
         </DocumentSet>
         <MorphemeAnalysis>
             <Field>
@@ -144,12 +147,6 @@
                 <REPORTER_GROUP/>
             </Field>
         </MultiGroup>
-        <Id>
-            <![CDATA[Collection Id]]>
-        </Id>
-        <original>
-            <![CDATA[Collection Original]]>
-        </original>
     </Collection>
 </RSS>
 
