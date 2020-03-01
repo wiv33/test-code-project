@@ -1,6 +1,7 @@
 package com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * package: com.psawesome.testcodeproject.create_xml_documentBuilderFactory
@@ -15,4 +16,6 @@ interface CreatedElementInterface {
     CreatedElementInterface nonCDATAChild(String elementId, String textContent);
 
     CreatedElementInterface createDomTree(Element... elements);
+
+    String getResultXml(Node rootNode);
 }

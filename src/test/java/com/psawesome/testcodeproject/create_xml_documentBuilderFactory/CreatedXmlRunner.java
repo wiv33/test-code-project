@@ -27,8 +27,6 @@ import java.util.function.BiConsumer;
 
 public class CreatedXmlRunner {
 
-    Document d = null;
-
     @Test
     void runCreatedXML() {
 

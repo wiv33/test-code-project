@@ -141,7 +141,8 @@ public class CreatedElement implements CreatedElementInterface {
         return this;
     }
 
-    public String getResultXml(Node printNode) {
+    @Override
+    public String getResultXml(Node rootNode) {
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer t = null;
         try {
@@ -158,7 +159,7 @@ public class CreatedElement implements CreatedElementInterface {
 
         String ret = "";
         try(StringWriter sw = new StringWriter()){
-            t.transform(new DOMSource(printNode), new StreamResult(sw));
+            t.transform(new DOMSource(rootNode), new StreamResult(sw));
             sw.flush();
             ret = sw.toString();
         } catch (IOException | TransformerException e) {
