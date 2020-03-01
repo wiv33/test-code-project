@@ -1,6 +1,5 @@
 package com.psawesome.testcodeproject.create_xml_documentBuilderFactory;
 
-import com.mongodb.event.CommandSucceededEvent;
 import com.psawesome.testcodeproject.create_xml_documentBuilderFactory.custom.CreatedElement;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
@@ -10,8 +9,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 /**
  * @author pilseong
@@ -32,13 +33,18 @@ public class CreatedXmlRunner {
     void runCreatedXML() {
 
         CreatedElement ce = new CreatedElement(
-                List.of("RSS", "Collection", "MorphemeAnalysis", "DocumentSet", "Document", "MultiGroup"));
+                List.of("RSS", "Collection", "MorphemeAnalysis", "DocumentSet", "MultiGroup"));
         Element rss = ce.getElement("RSS");
         Element collection = ce.getElement("Collection");
         Element morphemeAnalysis = ce.getElement("MorphemeAnalysis");
         Element documentSet = ce.getElement("DocumentSet");
         Element multiGroup = ce.getElement("MultiGroup");
-        Element document = ce.getElement("Document");
+
+        HashMap<String, String> paramMap = new HashMap<>();
+        paramMap.put("TOTAL_ID", "PARAM TOTAL ID !!");
+        paramMap.put("ART_TYPE", "PARAM ART TYPE!!!");
+        paramMap.put("SRC_GRP_CD", "PARAM SRC_GRP_CD!!!");
+
         ce.setRootElement(rss)
                 .createDomTree(collection)
                 .appendChild("Version", "5.0.0")
@@ -52,7 +58,7 @@ public class CreatedXmlRunner {
                     .createDomTree(ce.putAndGetElement("Document"))
                     .appendChild("Count", "5")
                     .appendChild("TotalCount", "135")
-                .setRootElement(document)
+                .setRootElement(ce.getElement("Document"))
                         .createDomTree(ce.putAndGetElement("Field"))
                         .appendChild("Uid", "UID")
                         .appendChild("Rank", "Rank")
@@ -61,17 +67,20 @@ public class CreatedXmlRunner {
                         .appendChild("CollectionId", "CollectionId")
                         .appendChild("DuplicateDocumentCount", "DuplicateDocumentCount")
                 .setRootElement(ce.getElement("Field"))
-                        .stepEnd(ce, this::makeDocumentFields)
+                        .stepEnd(this::makeDocumentFields, paramMap)
                         .stepRemoveRecentElementEnd()
             .setRootElement(morphemeAnalysis)
                  .createDomTree(ce.putAndGetElement("Field"))
                     .setRootElement(ce.getElement("Field"))
-                    .stepEnd(ce, this::makeMorphemeFields)
+                    .stepEnd(this::makeMorphemeFields, paramMap)
                     .stepRemoveRecentElementEnd()
             .setRootElement(multiGroup)
                 .createDomTree(ce.putAndGetElement("Field"))
                     .setRootElement(ce.getElement("Field"))
-                    .stepEnd(ce, this::makeMultiGroupFields)
+                    .stepEnd((createdElement, map) -> createdElement
+                            .appendChild("SRC_GRP_CD", map.get("SRC_GRP_CD"))
+                            .appendChild("SERVICE_CODE", "")
+                            .appendChild("REPORTER_GROUP", ""), paramMap)
                     .stepRemoveRecentElementEnd()
         ;
 
@@ -100,13 +109,13 @@ public class CreatedXmlRunner {
 
     }
 
-    private void makeDocumentFields(CreatedElement createdElement) {
+    private void makeDocumentFields(CreatedElement createdElement, Map<String, String> paramMap) {
         createdElement.appendChild("DOCID", "2732145")
-                .appendChild("TOTAL_ID", "퉤스트")
+                .appendChild("TOTAL_ID", paramMap.get("TOTAL_ID"))
                 .appendChild("ARTICLE_ID", "본문")
                 .appendChild("SOURCE_CODE", "본문")
                 .appendChild("VIEW_FLAG", "본문")
-                .appendChild("ART_TYPE", "본문")
+                .appendChild("ART_TYPE", paramMap.get("ART_TYPE"))
                 .appendChild("SERVICE_DAY", "본문")
                 .appendChild("SERVICE_TIME", "본문")
                 .appendChild("CONTENT_TYPE", "본문")
@@ -131,7 +140,7 @@ public class CreatedXmlRunner {
         ;
     }
 
-    private void makeMorphemeFields(CreatedElement createdElement) {
+    private void makeMorphemeFields(CreatedElement createdElement, Map<String, String> paramMap) {
         createdElement
                 .appendChild("ART_TITLE", "my Title!!")
                 .appendChild("MOB_TITLE", "MOB TITLE")
@@ -140,7 +149,7 @@ public class CreatedXmlRunner {
                 .appendChild("ART_SUBTITLE", "ART SUB TITLE");
     }
 
-    private void makeMultiGroupFields(CreatedElement createdElement) {
+    private void makeMultiGroupFields(CreatedElement createdElement, Map<String, String> paramMap) {
         createdElement
                 .appendChild("SRC_GRP_CD", "")
                 .appendChild("SERVICE_CODE", "")

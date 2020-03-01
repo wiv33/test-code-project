@@ -7,10 +7,8 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
@@ -19,7 +17,7 @@ import java.util.function.Consumer;
  * DATE: 2020-02-28 금요일 22:15
  */
 public class CreatedElement implements CreatedElementInterface {
-    private Element _element;
+    private Element _rootElement;
     private String recentElementId;
     private Map<String, Element> _elementsMap;
     private Document d;
@@ -40,17 +38,24 @@ public class CreatedElement implements CreatedElementInterface {
         this();
         assert elementsIds.size() > 0;
         Map<String, Element> _elMap = new HashMap<>();
-        elementsIds.forEach(id -> _elMap.put(id, this.d.createElement(id)));
+        elementsIds.forEach(id -> {
+            Element element = this.d.createElement(id);
+            _elMap.put(id, element);
+        });
         this._elementsMap = _elMap;
     }
 
+    public Element get_rootElement() {
+        return _rootElement;
+    }
+
     public CreatedElement appendChild(String elementId, String textContent) {
-        Objects.requireNonNull(this._element)
+        Objects.requireNonNull(this.get_rootElement())
                 .appendChild(this.setCDATA_content(elementId, textContent));
         return this;
     }
     public CreatedElement appendChild(Element element) {
-        Objects.requireNonNull(this._element)
+        Objects.requireNonNull(this.get_rootElement())
                 .appendChild(element);
         return this;
     }
@@ -58,26 +63,26 @@ public class CreatedElement implements CreatedElementInterface {
     @Override
     public CreatedElement createDomTree(Element... elements) {
         for (Element element : elements) {
-            this._element.appendChild(element);
+            this.get_rootElement().appendChild(element);
         }
         return this;
     }
 
     @Override
     public CreatedElement setRootElement(String elementId) {
-        this._element = this.d.createElement(elementId);
+        this._rootElement = this.d.createElement(elementId);
         return this;
     }
 
     public CreatedElement setRootElement(Element element) {
         this.stepEnd();
-        this._element = Objects.requireNonNull(element);
+        this._rootElement = Objects.requireNonNull(element);
         return this;
     }
 
     @Override
     public CreatedElement nonCDATAChild(String elementId, String textContent) {
-        Element element = Objects.requireNonNull(this._element);
+        Element element = Objects.requireNonNull(this._rootElement);
         Element child = this.d.createElement(elementId);
         child.setTextContent(textContent);
         element.appendChild(child);
@@ -99,16 +104,16 @@ public class CreatedElement implements CreatedElementInterface {
     }
 
     public Element putAndGetElement(String elementId) {
-        Element element = d.createElement(elementId);
-        if (Objects.nonNull(this._elementsMap.get(elementId))) {
+        if (Objects.isNull(this._elementsMap.get(elementId))) {
+            Element element = d.createElement(elementId);
             recentElementId = elementId;
             this._elementsMap.put(elementId, element);
         }
-        return element;
+        return this._elementsMap.get(elementId);
     }
 
     public CreatedElement stepEnd() {
-        this._element = null;
+        this._rootElement = null;
         return this;
     }
     public CreatedElement stepRemoveEnd(String removeElementId) {
@@ -124,8 +129,8 @@ public class CreatedElement implements CreatedElementInterface {
         return this;
     }
 
-    public CreatedElement stepEnd(CreatedElement ce,Consumer<CreatedElement> consumer) {
-        consumer.accept(ce);
+    public CreatedElement stepEnd(BiConsumer<CreatedElement, Map<String, String>> c, Map<String, String> param) {
+        c.accept(this, param);
         this.stepEnd();
         return this;
     }
