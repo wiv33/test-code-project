@@ -1,0 +1,155 @@
+# Used DocumentBuilderFactory
+
+## Result String
+
+    <?xml version="1.0" encoding="utf-8"?><RSS>
+        <Collection>
+            <DocumentSet>
+                <Document>
+                    <Field>
+                        <DOCID>
+                            <![CDATA[2732145]]>
+                        </DOCID>
+                        <TOTAL_ID>
+                            <![CDATA[PARAM TOTAL ID !!]]>
+                        </TOTAL_ID>
+                        <ARTICLE_ID>
+                            <![CDATA[본문]]>
+                        </ARTICLE_ID>
+                        <SOURCE_CODE>
+                            <![CDATA[본문]]>
+                        </SOURCE_CODE>
+                        <VIEW_FLAG>
+                            <![CDATA[본문]]>
+                        </VIEW_FLAG>
+                        <ART_TYPE>
+                            <![CDATA[PARAM ART TYPE!!!]]>
+                        </ART_TYPE>
+                        <SERVICE_DAY>
+                            <![CDATA[본문]]>
+                        </SERVICE_DAY>
+                        <SERVICE_TIME>
+                            <![CDATA[본문]]>
+                        </SERVICE_TIME>
+                        <CONTENT_TYPE>
+                            <![CDATA[본문]]>
+                        </CONTENT_TYPE>
+                        <PRESSDATE>
+                            <![CDATA[본문]]>
+                        </PRESSDATE>
+                        <PRESSCATEGORY>
+                            <![CDATA[본문]]>
+                        </PRESSCATEGORY>
+                        <PRESSMYUN>
+                            <![CDATA[본문]]>
+                        </PRESSMYUN>
+                        <ART_CRE_TIME>
+                            <![CDATA[본문]]>
+                        </ART_CRE_TIME>
+                        <ART_UPD_TIME>
+                            <![CDATA[본문]]>
+                        </ART_UPD_TIME>
+                        <SOURCE_NAME>
+                            <![CDATA[본문]]>
+                        </SOURCE_NAME>
+                        <SEARCH_CODE>
+                            <![CDATA[본문]]>
+                        </SEARCH_CODE>
+                        <PORTAL_CODE>
+                            <![CDATA[본문]]>
+                        </PORTAL_CODE>
+                        <MEDIA_CODE>
+                            <![CDATA[본문]]>
+                        </MEDIA_CODE>
+                        <MASTER_CODE_LIST>
+                            <![CDATA[본문]]>
+                        </MASTER_CODE_LIST>
+                        <SERVICE_CODE>
+                            <![CDATA[본문]]>
+                        </SERVICE_CODE>
+                        <SECTION_NAME>
+                            <![CDATA[본문]]>
+                        </SECTION_NAME>
+                        <SERVICE_CODE_LIST>
+                            <![CDATA[본문]]>
+                        </SERVICE_CODE_LIST>
+                        <SECTION_NAME_LIST>
+                            <![CDATA[본문]]>
+                        </SECTION_NAME_LIST>
+                        <ART_THUMB>
+                            <![CDATA[본문]]>
+                        </ART_THUMB>
+                        <ART_TITLE>
+                            <![CDATA[본문]]>
+                        </ART_TITLE>
+                        <MOB_TITLE>
+                            <![CDATA[본문]]>
+                        </MOB_TITLE>
+                        <ART_REPORTER>
+                            <![CDATA[본문]]>
+                        </ART_REPORTER>
+                    </Field>
+                    <Uid>
+                        <![CDATA[UID]]>
+                    </Uid>
+                    <Rank>
+                        <![CDATA[Rank]]>
+                    </Rank>
+                    <Weight>
+                        <![CDATA[Weight]]>
+                    </Weight>
+                    <SearcherId>
+                        <![CDATA[SearcherId]]>
+                    </SearcherId>
+                    <CollectionId>
+                        <![CDATA[CollectionId]]>
+                    </CollectionId>
+                    <DuplicateDocumentCount>
+                        <![CDATA[DuplicateDocumentCount]]>
+                    </DuplicateDocumentCount>
+                </Document>
+                <Count>
+                    <![CDATA[5]]>
+                </Count>
+                <TotalCount>
+                    <![CDATA[135]]>
+                </TotalCount>
+            </DocumentSet>
+            <MorphemeAnalysis>
+                <Field>
+                    <ART_TITLE>
+                        <![CDATA[my Title!!]]>
+                    </ART_TITLE>
+                    <MOB_TITLE>
+                        <![CDATA[MOB TITLE]]>
+                    </MOB_TITLE>
+                    <ART_KWD>
+                        <![CDATA[ART KWD]]>
+                    </ART_KWD>
+                    <ART_REPORTER>
+                        <![CDATA[ART REPORTER]]>
+                    </ART_REPORTER>
+                    <ART_SUBTITLE>
+                        <![CDATA[ART SUB TITLE]]>
+                    </ART_SUBTITLE>
+                </Field>
+            </MorphemeAnalysis>
+            <MultiGroup>
+                <Field>
+                    <SRC_GRP_CD>
+                        <![CDATA[PARAM SRC_GRP_CD!!!]]>
+                    </SRC_GRP_CD>
+                    <SERVICE_CODE/>
+                    <REPORTER_GROUP/>
+                </Field>
+            </MultiGroup>
+            <Id>
+                <![CDATA[Collection Id]]>
+            </Id>
+            <original>
+                <![CDATA[Collection Original]]>
+            </original>
+        </Collection>
+        <Version>5.0.0</Version>
+        <SuggestedQuery/>
+    </RSS>
