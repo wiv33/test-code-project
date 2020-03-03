@@ -138,7 +138,7 @@ public class CreatedElement implements CreatedElementInterface {
         return this;
     }
 
-    public CreatedElement stepEnd(BiConsumer<CreatedElement, Map<String, String>> c, Map<String, String> param) {
+    public CreatedElement stepEnd(BiConsumer<CreatedElement, Map<String, Object>> c, Map<String, Object> param) {
         c.accept(this, param);
         this.stepEnd();
         return this;
