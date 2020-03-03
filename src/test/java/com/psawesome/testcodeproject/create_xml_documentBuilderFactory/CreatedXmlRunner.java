@@ -135,4 +135,10 @@ public class CreatedXmlRunner {
                 .appendChild("REPORTER_GROUP", "")
                 ;
     }
+
+
+    @Test
+    void createdListElement() {
+
+    }
 }
