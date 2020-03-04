@@ -2,6 +2,7 @@ package com.psawesome.testcodeproject.pagination.more;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Description;
 
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,11 +24,13 @@ public class MoreRunner {
 
     @Test
     void testRandomValue() {
-        System.out.println(this.randomTotalIndex());
+        int x = this.randomTotalIndex();
+        Assertions.assertTrue(x > 0 && x < 100000);
+        System.out.println(x);
     }
 
     @Test
-    void page_start() {
+    void index_zero_start() {
         total_index = 32514;
         list_count = 10;
 
@@ -36,11 +39,47 @@ public class MoreRunner {
                 .setTotalIndex(total_index)
                 .setCount(list_count);
 
-        Map<String, Integer> map = more.getPage();
-        Assertions.assertEquals(list_count, map.get("next_index"));
+        Map<String, Integer> map = more.build();
+        Assertions.assertEquals(list_count * 2, map.get("next_index"));
         Assertions.assertEquals(0, map.get("prev_index"));
-        Assertions.assertEquals(0, map.get("current_index"));
+        Assertions.assertEquals(10, map.get("current_index"));
         Assertions.assertEquals(0, map.get("isEnd"));
+    }
+
+    @Test
+    void index_one_start() {
+        total_index = 32514;
+        list_count = 10;
+        start_index = 1;
+
+        MorePagination more = new MorePagination();
+        more.setStart(start_index)
+                .setTotalIndex(total_index)
+                .setCount(list_count);
+
+        Map<String, Integer> map = more.build();
+        Assertions.assertEquals(list_count * 2 + 1, map.get("next_index"));
+        Assertions.assertEquals(1, map.get("prev_index"));
+        Assertions.assertEquals(11, map.get("current_index"));
+        Assertions.assertEquals(0, map.get("isEnd"));
+    }
+
+    @Test
+    @Description("total_index 가 끝났을 때")
+    void index_zero_start_and_maximum_total_index() {
+        total_index = 9;
+        list_count = 10;
+
+        MorePagination more = new MorePagination();
+        more.setStart(start_index)
+                .setTotalIndex(total_index)
+                .setCount(list_count);
+
+        Map<String, Integer> map = more.build();
+        Assertions.assertEquals(0, map.get("next_index"));
+        Assertions.assertEquals(0, map.get("prev_index"));
+        Assertions.assertEquals(9, map.get("current_index"));
+        Assertions.assertEquals(1, map.get("isEnd"));
     }
 
     @Test
