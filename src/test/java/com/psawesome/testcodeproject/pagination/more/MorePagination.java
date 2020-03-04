@@ -36,7 +36,8 @@ public class MorePagination {
     }
 
     public Map<String, Integer> build() {
-        this.current_index = this.start_index + list_count;
+        this.init();
+
         HashMap<String, Integer> retMap = new HashMap<>();
         retMap.put("next_index", getNextIndex());
         retMap.put("prev_index", getPrevIndex());
@@ -45,15 +46,19 @@ public class MorePagination {
         return retMap;
     }
 
+    private void init() {
+
+    }
+
     private Integer getPrevIndex() {
         return this.start_index;
     }
 
     private Integer getNextIndex() {
-        return this.list_count + this.current_index;
+        return 0;
     }
 
     private Integer isEnd() {
-        return this.current_index * this.list_count <= this.total_index ? 0 : 1;
+        return 0;
     }
 }
