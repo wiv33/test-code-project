@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author pilseong
@@ -21,6 +22,11 @@ public class MoreRunner {
     int start_index = 0, total_index = 0, list_count = 0;
 
     @Test
+    void testRandomValue() {
+        System.out.println(this.randomTotalIndex());
+    }
+
+    @Test
     void page_start() {
         total_index = 32514;
         list_count = 10;
@@ -35,5 +41,15 @@ public class MoreRunner {
         Assertions.assertEquals(0, map.get("prev_index"));
         Assertions.assertEquals(0, map.get("current_index"));
         Assertions.assertEquals(0, map.get("isEnd"));
+    }
+
+    @Test
+    void n_more() {
+
+    }
+
+    private int randomTotalIndex() {
+        return ThreadLocalRandom.current()
+                .nextInt(0, 100000);
     }
 }

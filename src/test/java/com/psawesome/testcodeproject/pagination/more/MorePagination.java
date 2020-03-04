@@ -1,5 +1,7 @@
 package com.psawesome.testcodeproject.pagination.more;
 
+import java.util.Map;
+
 /**
  * @author pilseong
  * @version 1.0
@@ -12,4 +14,19 @@ package com.psawesome.testcodeproject.pagination.more;
  */
 
 public class MorePagination {
+    public MorePagination setStart(int start_index) {
+        return this;
+    }
+
+    public MorePagination setTotalIndex(int total_index) {
+        return this;
+    }
+
+    public MorePagination setCount(int list_count) {
+        return this;
+    }
+
+    public Map<String, Integer> getPage() {
+        return null;
+    }
 }
