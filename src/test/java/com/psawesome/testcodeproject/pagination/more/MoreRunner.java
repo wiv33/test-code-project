@@ -26,10 +26,14 @@ public class MoreRunner {
         list_count = 10;
 
         MorePagination more = new MorePagination();
-        Map<String, Integer> map = more.getPage(total_index, list_count, start_index);
-        Assertions.assertNotNull(map.get("next_index"));
-        Assertions.assertNotNull(map.get("prev_index"));
-        Assertions.assertNotNull(map.get("current_index"));
-        Assertions.assertNotNull(map.get("isEnd"));
+        more.setStart(start_index)
+                .setTotalIndex(total_index)
+                .setCount(list_count);
+
+        Map<String, Integer> map = more.getPage();
+        Assertions.assertEquals(list_count, map.get("next_index"));
+        Assertions.assertEquals(0, map.get("prev_index"));
+        Assertions.assertEquals(0, map.get("current_index"));
+        Assertions.assertEquals(0, map.get("isEnd"));
     }
 }
