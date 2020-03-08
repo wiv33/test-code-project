@@ -1,6 +1,4 @@
-package com.psawesome.testcodeproject.lombokTest;
-
-import net.bytebuddy.ByteBuddy;
+package com.psawesome.testcodeproject.bytebuddyTest.model;
 
 /**
  * package: com.psawesome.testcodeproject.lombokTest
@@ -14,8 +12,4 @@ public class MyChildClass {
     private Long id;
     private String name;
 
-    public MyChildClass() {
-        ByteBuddy byteBuddy = new ByteBuddy();
-
-    }
 }
