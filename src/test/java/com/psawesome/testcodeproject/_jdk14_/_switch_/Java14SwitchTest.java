@@ -23,7 +23,9 @@ public class Java14SwitchTest {
             case "b" -> 4;
             case "c" -> 6;
             case "d" -> 7;
-        }
+            default -> throw new IllegalStateException("Unexpected value: " + a);
+        };
+
         System.out.println("num = " + num);
         var b = "d";
         System.out.println(switch (b) {
@@ -31,6 +33,7 @@ public class Java14SwitchTest {
             case "b" -> 4;
             case "c" -> 6;
             case "d" -> 7;
+            default -> throw new IllegalStateException("Unexpected value: " + b);
         });
 
     }
