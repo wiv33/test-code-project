@@ -2,11 +2,12 @@ plugins {
     id 'org.springframework.boot' version '2.2.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.71'
 }
 
 group = 'com.psawesome'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '13'
 
 configurations {
     compileOnly {
@@ -34,10 +35,21 @@ dependencies {
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
     compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 
 }
 
 test {
     useJUnitPlatform()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 }
