@@ -30,7 +30,13 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'io.projectreactor:reactor-test'
+    /*mockito*/
 //    testImplementation 'org.springframework:spring-webmvc'
+
+    /*elasticSearch*/
+    implementation 'org.elasticsearch:elasticsearch'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client'
+
 
     /* jaxb */
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'

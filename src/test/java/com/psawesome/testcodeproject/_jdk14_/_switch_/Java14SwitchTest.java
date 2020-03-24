@@ -1,7 +1,5 @@
 package com.psawesome.testcodeproject._jdk14_._switch_;
 
-import org.junit.jupiter.api.Test;
-
 /**
  * @author pilseong
  * @version 1.0
@@ -12,6 +10,7 @@ import org.junit.jupiter.api.Test;
  * ------          --------      --------------------------
  * @since 2020-03-20
  */
+/*
 
 public class Java14SwitchTest {
 
@@ -38,3 +37,4 @@ public class Java14SwitchTest {
 
     }
 }
+*/
