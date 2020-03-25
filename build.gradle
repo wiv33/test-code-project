@@ -39,7 +39,7 @@ dependencies {
 
     /* kafka */
     implementation 'org.apache.kafka:kafka-clients'
-    implementation 'io.projectractor.kafka:reactor-kafka'
+    implementation 'io.projectreactor.kafka:reactor-kafka'
     implementation 'io.projectreactor:reactor-core'
 
     /* jaxb */
