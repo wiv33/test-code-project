@@ -37,6 +37,10 @@ dependencies {
     implementation 'org.elasticsearch:elasticsearch'
     implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client'
 
+    /* kafka */
+    implementation 'org.apache.kafka:kafka-clients'
+    implementation 'io.projectractor.kafka:reactor-kafka'
+    implementation 'io.projectreactor:reactor-core'
 
     /* jaxb */
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'

@@ -21,4 +21,6 @@ class MyElasticSearchTest {
     void name() {
         Assertions.assertNotNull(client);
     }
+
+
 }

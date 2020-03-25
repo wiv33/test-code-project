@@ -34,7 +34,6 @@ public class Java14SwitchTest {
             case "d" -> 7;
             default -> throw new IllegalStateException("Unexpected value: " + b);
         });
-
     }
 }
 */
