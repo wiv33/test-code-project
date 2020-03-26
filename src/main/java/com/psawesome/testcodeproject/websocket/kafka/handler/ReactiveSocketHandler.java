@@ -1,7 +1,6 @@
 package com.psawesome.testcodeproject.websocket.kafka.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketSession;
@@ -17,8 +16,11 @@ public class ReactiveSocketHandler implements WebSocketHandler {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
-    KafkaService kafkaService;
+    final KafkaService kafkaService;
+
+    public ReactiveSocketHandler(KafkaService kafkaService) {
+        this.kafkaService = kafkaService;
+    }
 
     @Override
     public Mono<Void> handle(WebSocketSession session) {

@@ -1,6 +1,7 @@
 package com.psawesome.testcodeproject.websocket.kafka.handler;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +26,11 @@ class ReactiveSocketHandlerTest {
                 () -> Assertions.assertNotNull(kafkaService),
                 () -> Assertions.assertNotNull(handler)
         );
+    }
+
+    @Test
+    @DisplayName("")
+    void testWebsocketHandlerSendMessage() {
 
     }
 }
