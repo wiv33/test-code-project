@@ -13,7 +13,7 @@ services:
       - ps_kafka_network
 
   ps_kafka:
-    image: wurstmeister/kafka::2.12-2.0.1
+    image: wurstmeister/kafka:2.12-2.0.1
     container_name: ps_kafka
     environment:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
