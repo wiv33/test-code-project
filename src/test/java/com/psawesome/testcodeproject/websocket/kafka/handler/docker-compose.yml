@@ -20,7 +20,7 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: PLAINTEXT://0.0.0.0:9092
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: ps_zookeeper:2181
-      KAFKA_CREATE_TOPICS: 'javainuse-topic:1:1' # Topic명 : partition개수 : replica 개수
+      KAFKA_CREATE_TOPICS: 'psawesome-topic:1:1' # Topic명 : partition개수 : replica 개수
     ports:
       - "9092:9092"
     depends_on:
