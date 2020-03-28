@@ -1,10 +1,15 @@
 package com.psawesome.testcodeproject.websocket.kafka.handler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.psawesome.testcodeproject.websocket.kafka.handler.dto.MyMessage;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
+import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
 import reactor.core.publisher.Mono;
+import reactor.kafka.receiver.ReceiverRecord;
 
 /**
  * package: com.psawesome.testcodeproject.websocket.kafka.handler
@@ -22,8 +27,20 @@ public class ReactiveSocketHandler implements WebSocketHandler {
         this.kafkaService = kafkaService;
     }
 
+    @NotNull
     @Override
     public Mono<Void> handle(WebSocketSession session) {
-        return null;
+        return session.send(kafkaService.getTestTopicFlux()
+        .map((ReceiverRecord<String, String> record) -> {
+            MyMessage myMessage = new MyMessage("[Test] Add message", record.value());
+            try {
+                return mapper.writeValueAsString(myMessage);
+            } catch (JsonProcessingException e) {
+                return "error while serializing to JSON";
+            }
+        })
+        .map(session::textMessage))
+        .and(session.receive().map(WebSocketMessage::getPayloadAsText).log());
     }
+
 }
