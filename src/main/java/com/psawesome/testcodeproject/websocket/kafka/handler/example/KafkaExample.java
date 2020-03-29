@@ -10,6 +10,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Properties;
@@ -52,7 +53,7 @@ public class KafkaExample {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList(topic));
         while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(3000);
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(3));
             for (ConsumerRecord<String, String> record : records) {
                 log.info("{} [{}] offset={}, key={}, value=\"{}\"\n",
                         record.topic(), record.partition(),
@@ -68,7 +69,10 @@ public class KafkaExample {
                 int i = 0;
                 while(true) {
                     LocalDateTime d = LocalDateTime.now();
-                    producer.send(new ProducerRecord<>(topic, Integer.toString(i), d.toString()));
+                    producer.send(new ProducerRecord<>(topic, Integer.toString(i), d.toString()), (metadata, exception) -> {
+                        System.out.println(metadata);
+                        System.out.println("metadata = " + metadata);
+                    });
                     Thread.sleep(3000);
                     i++;
                 }
