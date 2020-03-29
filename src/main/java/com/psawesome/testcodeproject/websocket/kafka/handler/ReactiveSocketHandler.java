@@ -3,7 +3,6 @@ package com.psawesome.testcodeproject.websocket.kafka.handler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.psawesome.testcodeproject.websocket.kafka.handler.dto.MyMessage;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
@@ -27,7 +26,6 @@ public class ReactiveSocketHandler implements WebSocketHandler {
         this.kafkaService = kafkaService;
     }
 
-    @NotNull
     @Override
     public Mono<Void> handle(WebSocketSession session) {
         return session.send(kafkaService.getTestTopicFlux()

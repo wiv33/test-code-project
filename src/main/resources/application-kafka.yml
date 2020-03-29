@@ -1,3 +1,6 @@
 spring:
   profiles:
     active: kafka
+
+  application:
+    name: kafka-server
