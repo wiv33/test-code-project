@@ -36,6 +36,5 @@ class ReactiveSocketHandlerTest {
     @Test
     @DisplayName("")
     void testWebsocketHandlerSendMessage() {
-
     }
 }
