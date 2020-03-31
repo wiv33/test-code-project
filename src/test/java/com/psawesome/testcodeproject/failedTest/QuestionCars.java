@@ -28,7 +28,7 @@ public class QuestionCars {
             }
         }
 
-            Assertions.assertEquals("abBcBdEBeEBfEBXEBgE", sb.toString());
+            Assertions.assertEquals("abBcBdEBeEBfEBX", sb.toString());
 
     }
 }
