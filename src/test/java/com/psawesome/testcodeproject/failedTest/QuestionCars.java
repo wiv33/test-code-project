@@ -16,9 +16,19 @@ public class QuestionCars {
     String[] inputStreets2 = {"", "BBBBBB", "", "", "EEEEEE", "", ""};
 
     @ParameterizedTest(name = "input load")
-    @ValueSource(strings = {"abcdefXghi", "Xabcdefghi"})
+    @ValueSource(strings = {"abcdefXghi", "Xabcdefghi", "abcdefghiX"})
     void name(String road) {
+//        문제 정의와 해결책을 먼저 생각
+
         StringBuilder sb = new StringBuilder();
-        Assertions.assertEquals("abBcBdEBeEBfEBXEBgE", sb.toString());
+        char[] chars = road.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == 'X') {
+
+            }
+        }
+
+            Assertions.assertEquals("abBcBdEBeEBfEBXEBgE", sb.toString());
+
     }
 }
