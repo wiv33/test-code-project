@@ -32,7 +32,10 @@ public class CollectStreamExam {
                 .collect(Collectors.toList());
 
         assertAll("Find Persons",
-                () -> assertArrayEquals(expected.toArray(), p1.toArray())
+                () -> assertArrayEquals(expected.toArray(), p1.toArray()),
+                () -> assertEquals(1, p1.size()),
+                () -> assertEquals("PIL", p1.get(0).getName()),
+                () -> assertEquals(27, p1.get(0).getAge())
         );
     }
 
