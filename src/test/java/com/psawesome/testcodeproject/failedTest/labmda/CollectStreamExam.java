@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,14 @@ public class CollectStreamExam {
                 () -> assertArrayEquals(expected1.toArray(), age17.toArray()),
                 () -> assertEquals(expectedSize, age17.size())
         );
+    }
+
+    @Test
+    void testGrouping() {
+        Map<Integer, List<MyPerson>> collect = myPersonList.parallelStream()
+                .collect(Collectors.groupingBy(MyPerson::getAge));
+
+        collect.forEach((age, p) -> System.out.format("age %s : %s\n", age, p));
     }
 }
 
