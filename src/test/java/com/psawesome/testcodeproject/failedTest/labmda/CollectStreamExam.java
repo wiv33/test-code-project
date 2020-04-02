@@ -1,5 +1,6 @@
 package com.psawesome.testcodeproject.failedTest.labmda;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,8 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * package: com.psawesome.testcodeproject.failedTest.labmda
@@ -23,14 +23,34 @@ public class CollectStreamExam {
             new MyPerson("Raina", 28));
 
     @Test
+    @DisplayName("FIND PIL")
     void testFindPil() {
         List<MyPerson> expected = Arrays.asList(new MyPerson("PIL", 27));
+
         List<MyPerson> p1 = myPersonList.parallelStream()
                 .filter(p -> p.getName().startsWith("P"))
                 .collect(Collectors.toList());
 
-        assertAll("Find PIL",
-                () -> assertArrayEquals(expected.toArray(), p1.toArray()));
+        assertAll("Find Persons",
+                () -> assertArrayEquals(expected.toArray(), p1.toArray())
+        );
+    }
+
+    @Test
+    @DisplayName("20세 이하")
+    void testFindAge() {
+        List<MyPerson> expected1 = Arrays.asList(new MyPerson("Natal", 17), new MyPerson("Netty", 17));
+        int expectedSize = 2;
+
+        List<MyPerson> age17 = myPersonList.stream()
+                .filter(s -> s.getAge() < 20)
+                .collect(Collectors.toList());
+
+
+        assertAll("20세 이하",
+                () -> assertArrayEquals(expected1.toArray(), age17.toArray()),
+                () -> assertEquals(expectedSize, age17.size())
+        );
     }
 }
 
