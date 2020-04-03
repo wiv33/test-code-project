@@ -1,5 +1,6 @@
 package com.psawesome.testcodeproject.failedTest.labmda;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,16 +65,21 @@ public class StreamExam {
     }
 
     @Test
+    @DisplayName("특정 문자가 포함되어 있는 UUID 출력")
     void testStreamIterate_two() {
         StopWatch sw = new StopWatch();
         sw.start();
-        Stream.iterate(0, i -> i++)
+        Stream.iterate(0, i -> i + 1)
                 .map(i -> UUID.randomUUID() + "_" + i )
-                .filter(s -> s.contains("p") || s.contains("s"))
+                .filter(s -> {
+                    boolean b = s.contains("b") || s.contains("s");
+                    System.out.format("{%s} -> {%b}\n",s , b);
+                    return b;
+                })
                 .findFirst()
-                .ifPresent(r -> System.out.println("result = " + r));
+                .ifPresent(r -> log.info("result {} ", r));
         sw.stop();
-        System.out.println(sw.getTotalTimeSeconds());
+        log.info("total Seconds : {}", sw.getTotalTimeSeconds());
     }
 
     @Test
