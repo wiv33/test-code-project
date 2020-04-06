@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -123,58 +124,19 @@ public class CollectStreamExam {
         String expected = "{17=Natal,Netty, 27=PIL, 28=Raina}";
         assertEquals(expected, actual.toString());
     }
-}
 
-class MyPerson {
-    String name;
-    int age;
+    @Test
+    void testCollectorOf() {
+        String actual = myPersonList.
+                parallelStream()
+                .collect(Collector.of(
+                        () -> new StringJoiner(" | ", "In the ", " world"),
+                        (StringJoiner j, MyPerson p) -> j.add(p.getName().toUpperCase()),
+                        StringJoiner::merge,
+                        StringJoiner::toString
+                ));
+        String expected = "In the NATAL | PIL | NETTY | RAINA world";
 
-    public MyPerson(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public MyPerson setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public MyPerson setAge(int age) {
-        this.age = age;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "MyPerson{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MyPerson myPerson = (MyPerson) o;
-
-        if (age != myPerson.age) return false;
-        return Objects.equals(name, myPerson.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + age;
-        return result;
+        assertEquals(expected, actual);
     }
 }
