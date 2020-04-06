@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * package: com.psawesome.testcodeproject.failedTest.labmda
@@ -57,12 +59,36 @@ public class StreamFlatMap {
     @Test
     void testCreateStreamPipeLine() {
         IntStream.range(1, 4)
-                .mapToObj(i -> new Foo("Foo" + i))
+                .mapToObj(i -> {
+                    log.info("check info root mapToObj: {}", i);
+                    return new Foo("Foo" + i);
+                })
                 .peek(f -> IntStream.range(1, 4)
-                        .mapToObj(i -> new Bar("Bar " + i + " <- " + f.getName()))
-                        .forEach(f.getBars()::add))
-                .flatMap(f -> f.getBars().stream())
+                        .mapToObj(i -> {
+                            log.info("check info peek.mapToObj {}", i);
+                            return new Bar("Bar " + i + " <- " + f.getName());
+                        })
+                        .forEach(e -> {
+                            log.info("check info peek.forEach {},", e.getName());
+                            f.getBars().add(e);
+                        }))
+                .flatMap(f -> {
+                    log.info("check Info flatMap: {}", f.getBars());
+                    return f.getBars().stream();
+                })
                 .forEach(b -> log.info(b.getName()));
 
+    }
+
+    @Test
+    void testStreamPeek() {
+        List<String> collect = Stream.of("one", "two", "three", "four")
+                .filter(e -> e.length() > 3)
+                .peek(e -> log.info("Filtered value: {}", e))
+                .map(String::toUpperCase)
+                .peek(e -> log.info("Mapped value: {}", e))
+                .collect(Collectors.toList());
+
+        System.out.println("collect = " + collect);
     }
 }
