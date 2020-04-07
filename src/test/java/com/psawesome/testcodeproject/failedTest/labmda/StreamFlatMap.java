@@ -59,17 +59,18 @@ public class StreamFlatMap {
     @Test
     void testCreateStreamPipeLine() {
         IntStream.range(1, 4)
+//                .parallel()
                 .mapToObj(i -> {
                     log.info("check info root mapToObj: {}", i);
                     return new Foo("Foo" + i);
                 })
                 .peek(f -> IntStream.range(1, 4)
                         .mapToObj(i -> {
-                            log.info("check info peek.mapToObj {}", i);
+                            log.info("check info peek.mapToObj => {}", i);
                             return new Bar("Bar " + i + " <- " + f.getName());
                         })
                         .forEach(e -> {
-                            log.info("check info peek.forEach {},", e.getName());
+                            log.info("check info peek.forEach => {}", e.toString());
                             f.getBars().add(e);
                         }))
                 .flatMap(f -> {
