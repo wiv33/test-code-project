@@ -3,10 +3,12 @@ package com.psawesome.testcodeproject.failedTest.labmda;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -37,6 +39,13 @@ public class StreamFlatMap {
     }
 
     List<Foo> foos;
+
+    List<MyPerson> myPersonList = Arrays.asList(
+            new MyPerson("Natal", 17),
+            new MyPerson("PIL", 27),
+            new MyPerson("Netty", 17),
+            new MyPerson("Raina", 28));
+
     @BeforeEach
     void setUp() {
         foos = new ArrayList<>();
@@ -91,5 +100,40 @@ public class StreamFlatMap {
                 .collect(Collectors.toList());
 
         System.out.println("collect = " + collect);
+    }
+
+    @Test
+    void testReduce() {
+        myPersonList.stream()
+                .reduce((p1, p2) -> p1.getAge() > p2.getAge() ? p1 : p2)
+                .ifPresent(o -> {
+                    log.info(o.toString());
+                    Assertions.assertEquals(new MyPerson("Raina", 28), o);
+                });
+    }
+
+    @Test
+    void testReduceTwoArgs() {
+        MyPerson actual = myPersonList.stream()
+                .reduce(new MyPerson("AM", 0), (((myPerson, myPerson2) -> {
+                    log.info("person Hash : {}, name: {}", myPerson.hashCode(), myPerson.getName());
+                    myPerson.setAge(myPerson.getAge() + myPerson2.getAge());
+                    myPerson.setName(myPerson.getName() + "_" + myPerson2.getName());
+                    return myPerson;
+                })));
+        MyPerson expected = new MyPerson("AM_Natal_PIL_Netty_Raina", 89);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void testReduceCombiner() {
+        myPersonList.parallelStream()
+                .reduce(0, (sum, p) -> {
+                    log.info("\nacc: sum={}, parseon={}", sum, p.getName());
+                    return sum + p.getAge();
+                }, (s1, s2) -> {
+                    log.info("\ncombiner: s1={}, s2={}", s1, s2);
+                    return s1 + s2;
+                });
     }
 }
