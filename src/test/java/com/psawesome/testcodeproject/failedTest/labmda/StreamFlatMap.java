@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -131,9 +132,12 @@ public class StreamFlatMap {
                 .reduce(0, (sum, p) -> {
                     log.info("\nacc: sum={}, parseon={}", sum, p.getName());
                     return sum + p.getAge();
-                }, (s1, s2) -> {
-                    log.info("\ncombiner: s1={}, s2={}", s1, s2);
-                    return s1 + s2;
+                }, new BinaryOperator<Integer>() {
+                    @Override
+                    public Integer apply(Integer s1, Integer s2) {
+                        log.info("\ncombiner: s1={}, s2={}", s1, s2);
+                        return s1 + s2;
+                    }
                 });
     }
 }
