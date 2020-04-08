@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -139,5 +140,11 @@ public class StreamFlatMap {
                         return s1 + s2;
                     }
                 });
+    }
+
+    @Test
+    void testForkJoin() {
+        ForkJoinPool commonPool = ForkJoinPool.commonPool();
+        log.info("cnt = {}", commonPool.getParallelism());
     }
 }
