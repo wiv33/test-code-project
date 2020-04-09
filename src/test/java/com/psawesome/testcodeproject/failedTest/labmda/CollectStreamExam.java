@@ -1,5 +1,7 @@
 package com.psawesome.testcodeproject.failedTest.labmda;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -65,57 +67,10 @@ public class CollectStreamExam {
         collect.forEach((age, p) -> System.out.format("age %s : %s\n", age, p));
     }
 }
-
+@Data
+@AllArgsConstructor
 class MyPerson {
     String name;
     int age;
 
-    public MyPerson(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public MyPerson setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public MyPerson setAge(int age) {
-        this.age = age;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "MyPerson{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MyPerson myPerson = (MyPerson) o;
-
-        if (age != myPerson.age) return false;
-        return Objects.equals(name, myPerson.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + age;
-        return result;
-    }
 }

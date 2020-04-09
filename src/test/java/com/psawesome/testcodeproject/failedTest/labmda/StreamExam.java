@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -84,6 +85,22 @@ public class StreamExam {
 
     @Test
     void testStreamBuilder() {
-        Stream.builder();
+        IntStream.iterate(0, a -> a + 1)
+                .mapToObj(v -> new MyPerson(UUID.randomUUID().toString(), v))
+        .limit(1000);
+    }
+
+    @Test
+    void testParallelStream() {
+        Arrays.asList("a1", "a2", "a3", "b1", "b2", "b4", "c7", "c3", "c9")
+        .parallelStream()
+                .filter(v -> {log.info("in filter"); return true;})
+                .map(s -> {log.info("in Map"); return s.toUpperCase();})
+                .sorted((o1, o2) -> {
+                    System.out.format("sort: %s.compareTo(%s) [%s] : result[%s]\n", o1, o2, Thread.currentThread().getName(), o1.compareTo(o2));
+                    return o1.compareTo(o2);
+                })
+                .forEach(v -> log.info("in last forEach"));
+
     }
 }
