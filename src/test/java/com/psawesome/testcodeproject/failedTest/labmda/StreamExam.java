@@ -95,7 +95,11 @@ public class StreamExam {
                     String[] a = str.split("");
                     Arrays.sort(a);
                     return String.join("", a);
-                }).sorted().reduce((a, b)-> b + "-" + a).stream())
+                }).reduce((a, b)-> b + "-" + a).stream()
+                .map(string -> {
+                    return string;
+                }))
+
                 .limit(1000)
         .forEach(System.out::println);
     }
