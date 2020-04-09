@@ -71,9 +71,10 @@ public class StreamExam {
         StopWatch sw = new StopWatch();
         sw.start();
         Stream.iterate(0, i -> i + 1)
+                .parallel()
                 .map(i -> UUID.randomUUID() + "_" + i )
                 .filter(s -> {
-                    boolean b = s.contains("b") || s.contains("s");
+                    boolean b = s.contains("p") || s.contains("s") || s.contains("k");
                     System.out.format("{%s} -> {%b}\n",s , b);
                     return b;
                 })
