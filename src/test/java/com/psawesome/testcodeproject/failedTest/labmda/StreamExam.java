@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -88,7 +87,17 @@ public class StreamExam {
     void testStreamBuilder() {
         IntStream.iterate(0, a -> a + 1)
                 .mapToObj(v -> new MyPerson(UUID.randomUUID().toString(), v))
-        .limit(1000);
+                .map(myPerson -> {
+                    System.out.println("name = " + myPerson.getName());
+                    return Arrays.asList(myPerson.getName().split("-"));
+                })
+                .flatMap(s -> s.stream().map(str -> {
+                    String[] a = str.split("");
+                    Arrays.sort(a);
+                    return String.join("", a);
+                }).sorted().reduce((a, b)-> b + "-" + a).stream())
+                .limit(1000)
+        .forEach(System.out::println);
     }
 
     @Test
