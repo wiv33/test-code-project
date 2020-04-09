@@ -1,7 +1,5 @@
 package com.psawesome.testcodeproject.failedTest.labmda;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -64,12 +62,6 @@ public class CollectStreamExam {
 
         collect.forEach((age, p) -> System.out.format("age %s : %s\n", age, p));
     }
-}
-@Data
-@AllArgsConstructor
-class MyPerson {
-    String name;
-    int age;
 
     @Test
     @DisplayName("P로 시작하는 객체의 집합")
