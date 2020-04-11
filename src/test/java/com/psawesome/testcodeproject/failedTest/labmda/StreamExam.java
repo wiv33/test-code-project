@@ -6,10 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -90,6 +87,7 @@ public class StreamExam {
     void testStreamBuilder() {
         IntStream.iterate(0, a -> a + 1)
                 .mapToObj(v -> new MyPerson(UUID.randomUUID().toString(), v))
+                .limit(1)
                 .map(myPerson -> {
                     System.out.println("name = " + myPerson.getName());
                     return Arrays.asList(myPerson.getName().split("-"));
@@ -98,17 +96,15 @@ public class StreamExam {
                     String[] a = str.split("");
                     Arrays.sort(a);
                     Map<String, List<String>> collect = Arrays.stream(a).collect(Collectors.groupingBy(x -> x));
-                    collect.forEach((b,c) -> {
-                        System.out.println(b);
-                        c.forEach(System.out::println);
-                    });
-                    return String.join("", a);
-                }).reduce((a, b)-> b + "-" + a).stream()
-                .map(string -> {
-                    return string;
+                    List<String> arr = new ArrayList<>();
+                    arr.add(String.join("", a));
+                    collect.put("key", arr);
+                    return collect;
+                }).flatMap(m -> {
+                    System.out.println(m);
+                    return m.keySet().stream().filter(k -> !k.equals("key"))
+                            .peek(k -> m.put(k, Arrays.asList(String.valueOf(m.get(k).size()))));
                 }))
-
-                .limit(1000)
         .forEach(System.out::println);
     }
 
