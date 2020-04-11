@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.StopWatch;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -94,6 +97,11 @@ public class StreamExam {
                 .flatMap(s -> s.stream().map(str -> {
                     String[] a = str.split("");
                     Arrays.sort(a);
+                    Map<String, List<String>> collect = Arrays.stream(a).collect(Collectors.groupingBy(x -> x));
+                    collect.forEach((b,c) -> {
+                        System.out.println(b);
+                        c.forEach(System.out::println);
+                    });
                     return String.join("", a);
                 }).reduce((a, b)-> b + "-" + a).stream()
                 .map(string -> {
