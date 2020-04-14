@@ -104,7 +104,7 @@ public class StreamExam {
                     System.out.println(m);
                     return m.keySet().stream().filter(k -> !k.equals("key"))
                             .peek(k -> m.put(k, Arrays.asList(String.valueOf(m.get(k).size()))));
-                }))
+                }).peek(c -> System.out.println("www + " + c)))
         .forEach(System.out::println);
     }
 
