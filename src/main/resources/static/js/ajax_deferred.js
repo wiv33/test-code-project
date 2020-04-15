@@ -8,6 +8,15 @@ var loadingInterval = function(func) {
     }
     return def.promise();
 };
+
+function getWeather() {
+
+}
+
+function getFineDust() {
+
+}
+
 setInterval(function () {
     $.when(loadingInterval(getWeather), loadingInterval(getFineDust)).done(function (re1, re2) {
         console.log(re1, re2);
