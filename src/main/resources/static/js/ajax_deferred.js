@@ -17,9 +17,15 @@ function getFineDust() {
 
 }
 
+function makeTopMenu() {
+
+}
+
 setInterval(function () {
-    $.when(loadingInterval(getWeather), loadingInterval(getFineDust)).done(function (re1, re2) {
-        console.log(re1, re2);
+    $.when(loadingInterval(makeTopMenu),
+        loadingInterval(getWeather),
+        loadingInterval(getFineDust)).done(function (re1, re2, re3) {
+        console.log(re1, re2, re3);
     });
 }, 38000);
 
