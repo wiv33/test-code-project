@@ -104,7 +104,11 @@ public class StreamExam {
                     System.out.println(m);
                     return m.keySet().stream().filter(k -> !k.equals("key"))
                             .peek(k -> m.put(k, Arrays.asList(String.valueOf(m.get(k).size()))));
-                }).peek(c -> System.out.println("www + " + c)))
+                }).peek(c -> {
+                    // TODO 각 원소의 개수만큼 map에 추가하기
+                    // key는 그대로
+                    System.out.println("www + " + c);
+                }))
         .forEach(System.out::println);
     }
 
