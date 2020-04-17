@@ -125,4 +125,24 @@ public class StreamExam {
                 .forEach(v -> log.info("in last forEach"));
 
     }
+
+    @Test
+    void testCode() {
+        class Solution {
+            public int[] solution(String s) {
+
+                String[] str = Stream.of(s.split(""))
+                        .filter(v -> !v.contains("{") && !v.contains("}"))
+                        .reduce((acc, c) -> acc + c)
+                        .get().split(",");
+                Set<Integer> set = new HashSet<Integer>();
+
+                int[] answer = new int[str.length];
+                for (var x : str) set.add(Integer.parseInt(x));
+                ArrayList<Integer> integers = new ArrayList<>();
+
+                return answer;
+            }
+        }
+    }
 }
