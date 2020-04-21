@@ -3,10 +3,7 @@ package com.psawesome.testcodeproject.failedTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ArticleIdCollection {
     ArrayList<Map<String, Object>> list;
@@ -31,4 +28,10 @@ public class ArticleIdCollection {
         String s = articleIdList(list);
     }
 
+    private String articleIdList(List<Map<String, Object>> list) {
+        return list.stream()
+                .map(m -> m.get("articleId"))
+                .reduce((a, b) -> a + "," + b)
+                .orElse("").toString();
+    }
 }
