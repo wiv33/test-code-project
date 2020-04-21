@@ -27,4 +27,8 @@ public class ArticleIdCollection {
         makeCategories(list);
     }
 
+    private void makeCategories(ArrayList<Map<String, Object>> list) {
+        String s = articleIdList(list);
+    }
+
 }
