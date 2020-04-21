@@ -125,4 +125,6 @@ public class StreamExam {
                 .forEach(v -> log.info("in last forEach"));
 
     }
+
+
 }
