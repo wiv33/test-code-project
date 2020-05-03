@@ -60,7 +60,7 @@ class SortingExam {
     @DisplayName("메서드 레퍼런스")
     void testSortMethodReference() {
         List<String> expected = Arrays.asList("anna", "mike", "milk", "peter");
-        Collections.sort(arr, Comparator.naturalOrder());
+        arr.sort(String::compareTo);
 
         Assertions.assertArrayEquals(expected.toArray(), arr.toArray());
     }
