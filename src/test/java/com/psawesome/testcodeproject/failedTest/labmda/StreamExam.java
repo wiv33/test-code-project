@@ -107,6 +107,13 @@ public class StreamExam {
                     return Stream.of(result);
                 }))
                 .collect(Collectors.reducing())
+                /*
+{2=1, 3=1, 4=1, e=1, 5=1, f=1, 8=1, 9=1, key=[234589ef]}
+{0=1, 2=1, 3=1, e=1, key=[023e]}
+{d=1, 4=1, f=1, 6=1, key=[46df]}
+{d=2, 9=2, key=[99dd]}
+{2=3, 3=2, e=1, f=2, 7=2, 9=2, key=[222337799eff]}
+                 */
         .forEach(System.out::println);
     }
 
