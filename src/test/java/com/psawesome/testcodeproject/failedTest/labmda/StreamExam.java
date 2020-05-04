@@ -89,7 +89,6 @@ public class StreamExam {
                 .mapToObj(v -> new MyPerson(UUID.randomUUID().toString(), v))
                 .limit(1)
                 .map(myPerson -> {
-                    System.out.println("name = " + myPerson.getName());
                     return Arrays.asList(myPerson.getName().split("-"));
                 })
                 .flatMap(s -> s.stream().map(str -> {
@@ -101,13 +100,13 @@ public class StreamExam {
                     collect.put("key", arr);
                     return collect;
                 }).flatMap(m -> {
-                    System.out.println(m);
-                    return m.keySet().stream().filter(k -> !k.equals("key"))
-                            .peek(k -> m.put(k, Arrays.asList(String.valueOf(m.get(k).size()))));
-                }).peek(c -> {
-                    // TODO 각 원소의 개수만큼 map에 추가하기
-                    // key는 그대로
+                    HashMap<String, Object> result = new HashMap<>();
+                    result.put("key", m.get("key"));
+                    m.keySet().stream().filter(k -> !k.equals("key"))
+                            .forEach(k -> result.put(k, String.valueOf(m.get(k).size())));
+                    return Stream.of(result);
                 }))
+                .collect(Collectors.reducing())
         .forEach(System.out::println);
     }
 
@@ -133,8 +132,8 @@ public class StreamExam {
                 String[] str = Stream.of(s.split(""))
                         .filter(v -> !v.contains("{") && !v.contains("}"))
                         .reduce((acc, c) -> acc + c)
-                        .get().split(",");
-                Set<Integer> set = new HashSet<Integer>();
+                        .orElse("").split(",");
+                Set<Integer> set = new HashSet<>();
 
                 int[] answer = new int[str.length];
                 for (var x : str) set.add(Integer.parseInt(x));
