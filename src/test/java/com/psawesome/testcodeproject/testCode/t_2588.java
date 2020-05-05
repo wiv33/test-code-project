@@ -44,17 +44,21 @@ public class t_2588 {
         );
     }
 
-
-
     @Test
     @DisplayName("1의 자리")
-    void testDisits_1() {
+    void testDigits_1() {
+        int resultX = this.getNum(x, 0);
+        int resultY = this.getNum(y, 0);
 
+        assertAll(
+                () -> assertEquals(2, resultX),
+                () -> assertEquals(5, resultY)
+        );
     }
 
-    private int getNum(int x, int digits) {
+    private int getNum(int n, int digits) {
         double pow = Math.pow(10, digits);
-        int floorDiv = Math.floorDiv(x, ((int) pow));
+        int floorDiv = Math.floorDiv(n, ((int) pow));
         return floorDiv % 10;
     }
 
