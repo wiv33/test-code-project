@@ -58,7 +58,7 @@ public class t_2588 {
 
     private int getNum(int n, int digits) {
         double pow = Math.pow(10, digits);
-        int floorDiv = Math.floorDiv(n, ((int) pow));
+        int floorDiv = Math.floorDiv(n, (int) pow);
         return floorDiv % 10;
     }
 
