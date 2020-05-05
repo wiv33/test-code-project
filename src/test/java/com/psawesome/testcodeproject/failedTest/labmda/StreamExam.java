@@ -106,7 +106,7 @@ public class StreamExam {
                             .forEach(k -> result.put(k, String.valueOf(m.get(k).size())));
                     return Stream.of(result);
                 }))
-                .collect(Collectors.reducing())
+//                .collect(Collectors.reducing())
                 /*
 {2=1, 3=1, 4=1, e=1, 5=1, f=1, 8=1, 9=1, key=[234589ef]}
 {0=1, 2=1, 3=1, e=1, key=[023e]}
