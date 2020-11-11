@@ -1,4 +1,4 @@
-package com.psawesome.testcodeproject.testCode;
+package com.psawesome.testcodeproject.baekjoon;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
