@@ -52,6 +52,10 @@ dependencies {
 
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+    // tag::xstream[]
+    // https://mvnrepository.com/artifact/xstream/xstream
+    compile group: 'xstream', name: 'xstream', version: '1.2.2'
+    // end::xstream[]
 
 }
 
